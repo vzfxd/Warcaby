@@ -9,11 +9,52 @@
 </head>
 <body>
     
-    <div class="container">
-        <input type="text" name="username" id="username">
-        <input type="button" value="Play" id="play">
+    <!--
+        MENU DO TWORZENIA I DOŁĄCZANIA DO GRY
+    -->
+
+    <div class="menu-container">
+        <div class="menu">
+            <div class="join">
+                <h5>Join the game</h5>
+                <input type="text" name="game-id" id="game-id">
+                <input type="button" value="Join" id="join">
+            </div>
+            <div class="create">
+                <h5>Create the game</h5>
+                <label for="">spanish</label>
+                <input type="radio" name="game-variant" id="spanish">
+                <label for="">german</label>
+                <input type="radio" name="game-variant" id="german">
+                <label for="">turkish</label>
+                <input type="radio" name="game-variant" id="turkish">
+                <input type="button" value="Create" id="create">
+            </div>
+        </div>
+    </div>
+
+    <!--
+        CZEKANIE NA DOŁĄCZENIE DRUGIEGO GRACZA
+    -->
+    
+    <div class="waiting-container">
+        <div>
+            <h1>SHARE CODE WITH YOUR FRIEND</h1>
+        </div>
+        <div>
+            <h1 class="code"></h1>
+        </div>
+    </div>
+
+    <!--
+        PLANSZA I GRA
+    -->
+
+    <div class="game-container">
+        <div class="turn"></div>
+        <div class="board"></div>
     </div>
 
 </body>
 </html>
-<script src="main.js"></script>
+<script type="module" src="script/main.js"></script>
