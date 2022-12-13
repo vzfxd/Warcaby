@@ -12,9 +12,10 @@ public abstract class Board {
     protected int heigth;
 
     public abstract ArrayList<int[]> checkBestPawnMoves(int[] pawnLocation);
+    protected abstract ArrayList<ArrayList<int[]>> getAllMoves(int[] pawnLocation);
 
     public ArrayList<ArrayList<int[]>> checkBestMoves(Color color){
-        ArrayList<ArrayList<int[]>> bestMoves = null;
+        ArrayList<ArrayList<int[]>> bestMoves = new ArrayList<>();
         int bestMoveLength = 0;
         for(int y = 0; y<this.heigth;y++){
             for(int x = 0; x<this.width;x++){
@@ -26,7 +27,7 @@ public abstract class Board {
                         moves.remove(0);
                         bestMoves.add(moves);
                     }
-                    else if(moves.get(0)[0]==bestMoveLength && bestMoves != null){
+                    else if(moves.get(0)[0]==bestMoveLength){
                         moves.remove(0);
                         bestMoves.add(moves);
                     }
@@ -36,8 +37,13 @@ public abstract class Board {
         return bestMoves;
     }
 
-    public void setTurn(Color color){
-        this.turn = color;
+    public void changeTurn(){
+        if(this.turn == Color.BLACK){
+            this.turn = Color.WHITE;
+        }
+        else{
+            this.turn = Color.BLACK;
+        }
     }
 
 }
