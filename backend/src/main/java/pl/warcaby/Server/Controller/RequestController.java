@@ -9,8 +9,10 @@ public class RequestController {
         return type;
     }
 
-    public String getGameId(String request){
-        return "xd";
+    public int getGameId(String request){
+        JSONObject json = new JSONObject(request);
+        int game_id = json.getInt("game_id");
+        return game_id;
     }
 
     public String getCurrentLocation(String request){

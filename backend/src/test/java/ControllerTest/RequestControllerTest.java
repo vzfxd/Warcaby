@@ -13,4 +13,11 @@ public class RequestControllerTest {
         String request = "{\"type\":\"JOIN\",\"game_id\":\"123456\"}";
         assertEquals("JOIN",requestController.getRequestType(request));
     }
+
+    @Test
+    public void getGameId(){
+        RequestController requestController = new RequestController();
+        String request = "{\"type\":\"JOIN\",\"game_id\":\"123456\"}";
+        assertEquals(123456 ,requestController.getGameId(request));
+    }
 }
