@@ -23,6 +23,8 @@ public class Field {
         return this.occupied.getType();
     }
 
+    public Pawn getOccupied(){ return this.occupied;}
+
     public void setOccupied(Pawn pawn){
         this.occupied = pawn;
     }
