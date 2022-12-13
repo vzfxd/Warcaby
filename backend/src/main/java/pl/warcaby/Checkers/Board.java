@@ -3,13 +3,13 @@ import java.util.ArrayList;
 
 public abstract class Board {
 
-    Field[][] fields;
+    protected Field[][] fields;
 
-    Color turn;
+    protected Color turn;
 
-    private int width;
+    protected int width;
 
-    private int heigth;
+    protected int heigth;
 
     public abstract ArrayList<int[]> checkBestPawnMoves(int[] pawnLocation);
 
@@ -18,7 +18,7 @@ public abstract class Board {
         int bestMoveLength = 0;
         for(int y = 0; y<this.heigth;y++){
             for(int x = 0; x<this.width;x++){
-                if(fields[y][x].getPawnColor()==color){
+                if(fields[x][y].getPawnColor()==color){
                     ArrayList<int[]> moves = checkBestPawnMoves(new int[]{x, y});
                     if(moves.get(0)[0]>bestMoveLength){
                         bestMoves = new ArrayList<>();
@@ -34,6 +34,10 @@ public abstract class Board {
             }
         }
         return bestMoves;
+    }
+
+    public void setTurn(Color color){
+        this.turn = color;
     }
 
 }
