@@ -26,6 +26,38 @@ public class SpanishBoard extends Board {
     }
     @Override
     public ArrayList<int[]> checkBestPawnMoves(int[] pawnLocation) {
+        ArrayList<int[]> bestMoves =  new ArrayList<>();
+        int x = pawnLocation[0];
+        int y = pawnLocation[1];
+        int bestMoveLength = 0;
+        if(this.fields[x][y].getPawnColor()==this.turn){
+            ArrayList<ArrayList<int[]>> allMoves = getAllMoves(pawnLocation);
+            for (ArrayList<int[]> move : allMoves) {
+                int len = move.get(0)[0];
+                if (len > bestMoveLength) {
+                    bestMoves = new ArrayList<>();
+                    for (int j = 0; j < len + 2; j++) {
+                        bestMoves.add(move.get(j));
+                    }
+                    bestMoveLength = len;
+                } else if (len == bestMoveLength) {
+                    int lim = len + 2;
+                    if (len == 0) {
+                        lim = 3;
+                    }
+                    for (int j = 2; j < lim; j++) {
+                        bestMoves.add(move.get(j));
+                    }
+                }
+            }
+            return bestMoves;
+
+        }
+        else return null;
+    }
+
+    @Override
+    protected ArrayList<ArrayList<int[]>> getAllMoves(int[] pawnLocation) {
         return null;
     }
 

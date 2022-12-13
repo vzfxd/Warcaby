@@ -19,6 +19,10 @@ public class Field {
         this.occupied.setType(PawnType.QUEEN);
     }
 
+    public PawnType getPawnType(){
+        return this.occupied.getType();
+    }
+
     public void setOccupied(Pawn pawn){
         this.occupied = pawn;
     }
