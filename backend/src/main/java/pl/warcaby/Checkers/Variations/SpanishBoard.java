@@ -159,7 +159,7 @@ public class SpanishBoard extends Board {
 
             //Czarne pionki
 
-            else if(pawnColor==Color.BLACK){
+            else{
 
                 //ruch w lewo
 

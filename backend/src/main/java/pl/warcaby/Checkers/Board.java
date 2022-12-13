@@ -1,5 +1,6 @@
 package pl.warcaby.Checkers;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Board {
 
@@ -21,16 +22,18 @@ public abstract class Board {
             for(int x = 0; x<this.width;x++){
                 if(fields[x][y].getPawnColor()==color){
                     ArrayList<int[]> moves = checkBestPawnMoves(new int[]{x, y});
-                    if(moves.get(0)[0]>bestMoveLength){
-                        bestMoves = new ArrayList<>();
-                        bestMoveLength = moves.get(0)[0];
-                        moves.remove(0);
-                        bestMoves.add(moves);
+                    if(moves.size() != 0) {
+                        if (moves.get(0)[0] > bestMoveLength) {
+                            bestMoves = new ArrayList<>();
+                            bestMoveLength = moves.get(0)[0];
+                            moves.remove(0);
+                            bestMoves.add(moves);
+                        } else if (moves.get(0)[0] == bestMoveLength) {
+                            moves.remove(0);
+                            bestMoves.add(moves);
+                        }
                     }
-                    else if(moves.get(0)[0]==bestMoveLength){
-                        moves.remove(0);
-                        bestMoves.add(moves);
-                    }
+                    else{ return null;}
                 }
             }
         }
@@ -45,5 +48,6 @@ public abstract class Board {
             this.turn = Color.BLACK;
         }
     }
+ 
 
 }
