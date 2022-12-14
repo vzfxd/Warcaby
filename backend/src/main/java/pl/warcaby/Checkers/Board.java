@@ -1,6 +1,6 @@
 package pl.warcaby.Checkers;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public abstract class Board {
 
@@ -33,9 +33,11 @@ public abstract class Board {
                             bestMoves.add(moves);
                         }
                     }
-                    else{ return null;}
                 }
             }
+        }
+        if (bestMoveLength==0){
+            return null;
         }
         return bestMoves;
     }
@@ -48,6 +50,6 @@ public abstract class Board {
             this.turn = Color.BLACK;
         }
     }
- 
+    public abstract void move(ArrayList<int[]> steps);
 
 }

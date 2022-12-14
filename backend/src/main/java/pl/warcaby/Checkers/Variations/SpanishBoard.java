@@ -30,19 +30,25 @@ public class SpanishBoard extends Board {
         int x = pawnLocation[0];
         int y = pawnLocation[1];
         int bestMoveLength = 0;
+        bestMoves.add(new int[]{0,0});
+        bestMoves.add(pawnLocation);
         if(this.fields[x][y].getPawnColor()==this.turn){
             ArrayList<ArrayList<int[]>> allMoves = getAllMoves(pawnLocation);
             for (ArrayList<int[]> move : allMoves) {
                 int len = move.get(0)[0];
                 if (len > bestMoveLength) {
                     bestMoves = new ArrayList<>();
-                    for (int j = 0; j < len + 2; j++) {
+                    int lim = len + 2;
+                    if(lim<3){
+                        lim=3;
+                    }
+                    for (int j = 0; j < lim; j++) {
                         bestMoves.add(move.get(j));
                     }
                     bestMoveLength = len;
                 } else if (len == bestMoveLength) {
                     int lim = len + 2;
-                    if (len == 0) {
+                    if (lim<3) {
                         lim = 3;
                     }
                     for (int j = 2; j < lim; j++) {
@@ -415,5 +421,37 @@ public class SpanishBoard extends Board {
         }
         return allMoves;
     }
+
+    @Override
+    public void move(ArrayList<int[]> steps) {
+        Pawn pawn = this.fields[steps.get(1)[0]][steps.get(1)[1]].getOccupied();
+        this.fields[steps.get(1)[0]][steps.get(1)[1]].setOccupied(null);
+        this.fields[steps.get(steps.size()-1)[0]][steps.get(steps.size()-1)[1]].setOccupied(pawn);
+        //usuwanie zbitych pionkow
+        for(int i=1;i<steps.size()-1;i++){
+            int x1 = steps.get(i)[0];
+            int y1 = steps.get(i)[1];
+            int x2 = steps.get(i+1)[0];
+            int y2 = steps.get(i+1)[1];
+            //zbicie od gornej lewej
+            if(x1<x2 && y1>y2){
+                this.fields[x2-1][y2+1].setOccupied(null);
+            }
+            //zbicie od dolnej lewej
+            else if(x1<x2 && y1<y2){
+                this.fields[x2-1][y2-1].setOccupied(null);
+            }
+            //zbicie od gornej prawej
+            else if(x1>x2 && y1>y2){
+                this.fields[x2+1][y2+1].setOccupied(null);
+            }
+            //zbicie od dolnej prawej
+            else if(x1>x2 && y1<y2){
+                this.fields[x2+1][y2-1].setOccupied(null);
+            }
+        }
+    }
+
+
 
 }

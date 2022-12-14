@@ -6,6 +6,9 @@ import pl.warcaby.Checkers.Color;
 import pl.warcaby.Checkers.Player;
 import pl.warcaby.Checkers.Variations.SpanishBoard;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class SpanishBoardTest {
@@ -36,4 +39,29 @@ public class SpanishBoardTest {
     }
 
 
+    @Test
+    public void bestMovesForPlayer(){
+        //Metoda nie zwroci zadnych mozliwosci bicia przy rozstawieniu początkowym
+        assertNull(spanishBoard.checkBestMoves(Color.WHITE));
+
+        //przesuwanie pionka z (1,2) na (2,3) oraz z (0,5) na (1,4)
+        ArrayList<int[]> moves = new ArrayList<>();
+        moves.add(new int[]{0,0});
+        moves.add(new int[]{1,2});
+        moves.add(new int[]{2,3});
+        spanishBoard.move(moves);
+
+        moves = new ArrayList<>();
+        moves.add(new int[]{0,0});
+        moves.add(new int[]{0,5});
+        moves.add(new int[]{1,4});
+        spanishBoard.move(moves);
+
+        //Metoda checkBestPawn powinna pokazac dostepne bicie
+        ArrayList<int[]> possibleMove = spanishBoard.checkBestPawnMoves(new int[]{2,3});
+        assertEquals(Arrays.toString(new int[]{1,1}), Arrays.toString(possibleMove.get(0)));
+        assertEquals(Arrays.toString(new int[]{2,3}), Arrays.toString(possibleMove.get(1)));
+        assertEquals(Arrays.toString(new int[]{0,5}), Arrays.toString(possibleMove.get(2)));
+        assertNotNull(spanishBoard.checkBestMoves(Color.WHITE));
+    }
 }
