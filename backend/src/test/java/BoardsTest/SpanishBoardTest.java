@@ -5,31 +5,31 @@ import pl.warcaby.Checkers.Board;
 import pl.warcaby.Checkers.Color;
 import pl.warcaby.Checkers.Player;
 import pl.warcaby.Checkers.Variations.SpanishBoard;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
+/**Klasa testująca działanie metod planszy hiszpańskiej.*/
 public class SpanishBoardTest {
 
     /**Tablica z rozstawieniem początkowym.*/
     Board spanishBoard = new SpanishBoard(new Player(Color.WHITE), new Player(Color.BLACK));
 
+    /**Test znajdywania najlepszych ruchów dla pojedynczego pionka*/
     @Test
     public void getPawnMovesTest(){
 
         //pionek w rogu planszy nie powinien mieć żadnych dostepnych ruchów
         assertNull(spanishBoard.checkBestPawnMoves(new int[]{0,0}));
         //bialy pionek z przodu powinien miec dwa dostepne ruchy
-        assertEquals(2,spanishBoard.checkBestPawnMoves(new int[]{1,2}).size());
+        assertEquals(4,spanishBoard.checkBestPawnMoves(new int[]{1,2}).size());
         //bialy pionek z przodu na rogu powinien miec jeden dostepny ruch
-        assertEquals(1,spanishBoard.checkBestPawnMoves(new int[]{7,2}).size());
+        assertEquals(3,spanishBoard.checkBestPawnMoves(new int[]{7,2}).size());
         spanishBoard.changeTurn();
         //czarny pionek z przodu na rogu powinien miec jeden dostepny ruch
-        assertEquals(1,spanishBoard.checkBestPawnMoves(new int[]{0,5}).size());
+        assertEquals(3,spanishBoard.checkBestPawnMoves(new int[]{0,5}).size());
     }
-
+    /**Test czy metoda znajdywania ruchów dla pionka znajduje ruchy tylko dla gracza, którego kolejka jest teraz.*/
     @Test
     public void wrongTurnTest(){
         //Metoda nie zwroci zadnych wynikow dla uzytkownika ktory czeka na ruch przeciwnika
@@ -37,8 +37,7 @@ public class SpanishBoardTest {
         spanishBoard.changeTurn();
         assertNotNull(spanishBoard.checkBestPawnMoves(new int[]{2,5}));
     }
-
-
+    /**Test znajdywania najlepszych możliwych ruchow dla gracza oraz wykonywania ruchow pionkami.*/
     @Test
     public void bestMovesForPlayer(){
         //Metoda nie zwroci zadnych mozliwosci bicia przy rozstawieniu początkowym
