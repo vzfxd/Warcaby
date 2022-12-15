@@ -34,7 +34,7 @@ public abstract class Board {
             for(int x = 0; x<this.width;x++){
                 if(fields[x][y].getPawnColor()==color){
                     ArrayList<int[]> moves = checkBestPawnMoves(new int[]{x, y});
-                    if(moves.size() != 0) {
+                    if(moves != null && moves.size() != 0) {
                         if (moves.get(0)[0] > bestMoveLength) {
                             bestMoves = new ArrayList<>();
                             bestMoveLength = moves.get(0)[0];
@@ -63,11 +63,15 @@ public abstract class Board {
      *
      * @param steps Lista zawierająca opis ruchu.*/
     public abstract void move(ArrayList<int[]> steps);
-
+    /**Metoda zwracająca tablice z polami planszy.
+     *
+     * @return tablica z polami planszy.*/
     public Field[][] getFields(){
         return this.fields;
     }
-
+    /**Metoda zwracajaca wymiary planszy.
+     *
+     * @return szerokosc i wysokosc planszy.*/
     public int[] getSize(){
         return new int[]{this.width,this.heigth};
     }

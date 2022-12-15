@@ -18,8 +18,8 @@ public class SpanishBoard extends Board {
         this.fields = new Field[8][8];
         for(int y = 0; y<8;y++){
             for(int x = 0; x<8;x++){
-                if(y<3 && (x+y)%2==1) {this.fields[x][y] = new Field(new Pawn(whitePlayer));}
-                else if(y>4 && (x+y)%2==1){this.fields[x][y] = new Field(new Pawn(blackPlayer));}
+                if(y<3 && (x+y)%2==0) {this.fields[x][y] = new Field(new Pawn(whitePlayer));}
+                else if(y>4 && (x+y)%2==0){this.fields[x][y] = new Field(new Pawn(blackPlayer));}
                 else{this.fields[x][y] = new Field();}
             }
         }
@@ -61,6 +61,9 @@ public class SpanishBoard extends Board {
                     if (lim<3) {lim = 3;}
                     for (int j = 2; j < lim; j++) {bestMoves.add(move.get(j));}
                 }
+            }
+            if(bestMoves.size()==2){
+                return null;
             }
             return bestMoves;
 
