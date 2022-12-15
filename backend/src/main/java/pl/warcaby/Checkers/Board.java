@@ -26,7 +26,7 @@ public abstract class Board {
     /**Metoda szukająca możliwych bić na planszy dla gracza z danym kolorem.
      *
      * @param color kolor gracza, dla którego bic szukamy.
-     * @return Listy dostępnych najlepszych bić dla gracza. W przypadku gdy nie ma zadnych bic zwraca null.*/
+     * @return Listy dostępnych najlepszych bić dla gracza.*/
     public ArrayList<ArrayList<int[]>> checkBestMoves(Color color){
         ArrayList<ArrayList<int[]>> bestMoves = new ArrayList<>();
         int bestMoveLength = 0;
