@@ -10,6 +10,7 @@ import pl.warcaby.Server.Controller.RequestController;
 import pl.warcaby.Server.Controller.ResponseController;
 
 import java.net.InetSocketAddress;
+import java.util.List;
 
 public class Server extends WebSocketServer {
 
@@ -34,7 +35,13 @@ public class Server extends WebSocketServer {
             int game_id = gameController.createGame(player, requestController.getVariant(s));
             responseController.createResponse(webSocket, game_id);
         } else if (requestType.equals("JOIN")) {
-            gameController.joinGame(new Player(Color.BLACK,webSocket), requestController.getGameId(s));
+            int game_id = requestController.getGameId(s);
+            Boolean joined = gameController.joinGame(new Player(Color.BLACK,webSocket), game_id);
+            if(joined){
+                String[][] printedBoard = gameController.printBoard(game_id);
+                List<Player> playerList = gameController.findGame(game_id).getPlayerList();
+                responseController.broadcast(printedBoard,playerList);
+            }
         }
     }
 

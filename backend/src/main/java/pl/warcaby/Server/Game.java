@@ -2,6 +2,7 @@ package pl.warcaby.Server;
 
 import pl.warcaby.Checkers.Board;
 import pl.warcaby.Checkers.BoardType;
+import pl.warcaby.Checkers.Field;
 import pl.warcaby.Checkers.Player;
 
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class Game {
         this.board = board;
     }
 
+    public Field[][] getBoardFields(){
+        return this.board.getFields();
+    }
+
     public int getGame_id() {
         return game_id;
     }
@@ -39,5 +44,9 @@ public class Game {
 
     public BoardType getBoardType() {
         return boardType;
+    }
+
+    public int[] getBoardSize(){
+        return this.board.getSize();
     }
 }

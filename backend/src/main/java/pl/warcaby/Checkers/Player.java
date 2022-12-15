@@ -21,4 +21,5 @@ public class Player {
     public void setWebSocket(WebSocket webSocket){
         this.webSocket = webSocket;
     }
+    public WebSocket getWebSocket() { return this.webSocket;}
 }
