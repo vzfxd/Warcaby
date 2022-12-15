@@ -84,7 +84,7 @@ function clickHandler(event){
             socket.send(request.toString());
         }
     }else{
-        const variant = document.querySelector('input[name="game-variant"]:checked').value;
+        const variant = document.querySelector('input[name="game-variant"]:checked').getAttribute('id');
         const request = new CreateRequest(variant);
         socket.send(request.toString());
     }
