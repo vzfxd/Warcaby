@@ -1,9 +1,6 @@
 package pl.warcaby.Server.Controller;
 
-import pl.warcaby.Checkers.BoardType;
-import pl.warcaby.Checkers.Color;
-import pl.warcaby.Checkers.Field;
-import pl.warcaby.Checkers.Player;
+import pl.warcaby.Checkers.*;
 import pl.warcaby.Checkers.Variations.SpanishBoard;
 import pl.warcaby.Server.Game;
 
@@ -42,6 +39,16 @@ public class GameController {
     public Color getFirstField(int game_id){
         Game game = findGame(game_id);
         if(game.getBoardType().equals(BoardType.SPANISH) || game.getBoardType().equals(BoardType.GERMAN)) return Color.WHITE; else return Color.BLACK;
+    }
+
+    public Board getGameBoard(int game_id){
+        Game game = findGame(game_id);
+        return game.getBoard();
+    }
+
+    public ArrayList<ArrayList<int[]>> getPossibleMoves(int game_id, Color color){
+        Game game = findGame(game_id);
+        return game.getBoard().checkBestMoves(color);
     }
 
     public String[][] printBoard(int game_id){

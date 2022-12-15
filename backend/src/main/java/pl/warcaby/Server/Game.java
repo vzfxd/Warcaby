@@ -49,4 +49,8 @@ public class Game {
     public int[] getBoardSize(){
         return this.board.getSize();
     }
+
+    public Board getBoard(){
+        return this.board;
+    }
 }

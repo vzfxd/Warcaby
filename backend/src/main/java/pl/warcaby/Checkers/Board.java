@@ -48,9 +48,6 @@ public abstract class Board {
                 }
             }
         }
-        if (bestMoveLength==0){
-            return null;
-        }
         return bestMoves;
     }
     /**Metoda zmieniajaca kolejke na drugiego gracza.*/

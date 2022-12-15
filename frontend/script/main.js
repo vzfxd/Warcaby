@@ -71,6 +71,9 @@ const waitingContainer = document.querySelector(".waiting-container");
 const gameContainer = document.querySelector(".game-container");
 const board = document.querySelector(".board");
 let socket;
+let selectedPiece;
+let playerColor;
+let possibleMoves;
 
 function establishConnection(url){
     socket = new WebSocket(url);
@@ -87,6 +90,9 @@ function establishConnection(url){
             let turn = response['turn'];
             let board = response['board'];
             let firstField = response['firstField'];
+            playerColor = response['color']
+            possibleMoves = response['possibleMoves'];
+            console.log(possibleMoves);
             createBoard(board, firstField);
             turn_div = document.querySelector(".turn");
             turn_div.innerHTML = turn;
@@ -137,14 +143,21 @@ function createBoard(responseBoard, firstField){
                 piece.classList.add("piece");
                 if(responseBoard[x][0][y]=="*"){
                     piece.style.backgroundColor = "yellow";
+                    if(playerColor=="WHITE") piece.addEventListener("click",pieceHandler);
                 }else {
                     piece.style.backgroundColor = "red";
+                    if(playerColor=="BLACK") piece.addEventListener("click",pieceHandler);
                 }
                 piece.style.borderRadius = "25px";
                 field.appendChild(piece);
             } 
         }
     }
+}
+
+function pieceHandler(event){
+    selectedPiece = event.srcElement;
+    console.log(selectedPiece);
 }
 
 joinButton.addEventListener("click", clickHandler);
