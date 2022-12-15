@@ -15,9 +15,16 @@ public class RequestControllerTest {
     }
 
     @Test
-    public void getGameId(){
+    public void getGameIdTest(){
         RequestController requestController = new RequestController();
         String request = "{\"type\":\"JOIN\",\"game_id\":\"123456\"}";
         assertEquals(123456 ,requestController.getGameId(request));
+    }
+
+    @Test
+    public void getVariantTest(){
+        RequestController requestController = new RequestController();
+        String request = "{\"type\":\"CREATE\",\"variant\":\"spanish\"}";
+        assertEquals("spanish",requestController.getVariant(request));
     }
 }

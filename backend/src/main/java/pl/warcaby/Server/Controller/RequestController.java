@@ -5,14 +5,17 @@ import org.json.JSONObject;
 public class RequestController {
     public String getRequestType(String request){
         JSONObject json = new JSONObject(request);
-        String type = json.getString("type");
-        return type;
+        return json.getString("type");
     }
 
     public int getGameId(String request){
         JSONObject json = new JSONObject(request);
-        int game_id = json.getInt("game_id");
-        return game_id;
+        return json.getInt("game_id");
+    }
+
+    public String getVariant(String request){
+        JSONObject json = new JSONObject(request);
+        return json.getString("variant");
     }
 
     public String getCurrentLocation(String request){
