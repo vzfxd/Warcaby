@@ -29,11 +29,12 @@ public class Server extends WebSocketServer {
     @Override
     public void onMessage(WebSocket webSocket, String s) {
         String requestType = requestController.getRequestType(s);
-        switch(requestType){
-            case "CREATE":  int game_id = gameController.createGame(new Player(Color.WHITE,webSocket),requestController.getVariant(s));
-                            responseController.createResponse(webSocket,game_id);
-                            break;
-            case "JOIN": gameController.joinGame(new Player(Color.BLACK,webSocket), requestController.getGameId(s));
+        if(requestType.equals("CREATE")) {
+            Player player = new Player(Color.WHITE, webSocket);
+            int game_id = gameController.createGame(player, requestController.getVariant(s));
+            responseController.createResponse(webSocket, game_id);
+        } else if (requestType.equals("JOIN")) {
+            gameController.joinGame(new Player(Color.BLACK,webSocket), requestController.getGameId(s));
         }
     }
 

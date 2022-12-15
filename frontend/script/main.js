@@ -70,10 +70,8 @@ let socket;
 
 function establishConnection(url){
     socket = new WebSocket(url);
-//    socket.addEventListener("message", (event)=>{responseHandler(event)});
+    socket.addEventListener("message", (event)=>{console.log(event)});
 }
-
-//function responseHandler(event){}
 
 function clickHandler(event){
     const src = event.srcElement;

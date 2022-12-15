@@ -10,4 +10,6 @@ public class ResponseController{
         json.put("game_id",game_id);
         webSocket.send(json.toString());
     }
+
+    public void joinResponse(){};
 }
