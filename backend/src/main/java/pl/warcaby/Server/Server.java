@@ -40,7 +40,8 @@ public class Server extends WebSocketServer {
             if(joined){
                 String[][] printedBoard = gameController.printBoard(game_id);
                 List<Player> playerList = gameController.findGame(game_id).getPlayerList();
-                responseController.broadcast(printedBoard,playerList);
+                Color firstField = gameController.getFirstField(game_id);
+                responseController.broadcast(printedBoard,playerList,firstField);
             }
         }
     }

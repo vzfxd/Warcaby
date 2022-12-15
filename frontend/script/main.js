@@ -69,6 +69,7 @@ const createButton = document.getElementById("create");
 const menuContainer = document.querySelector(".menu-container");
 const waitingContainer = document.querySelector(".waiting-container");
 const gameContainer = document.querySelector(".game-container");
+const board = document.querySelector(".board");
 let socket;
 
 function establishConnection(url){
@@ -84,6 +85,9 @@ function establishConnection(url){
         }
         if(response['feedback']=='game started'){
             let turn = response['turn'];
+            let board = response['board'];
+            let firstField = response['firstField'];
+            createBoard(board, firstField);
             turn_div = document.querySelector(".turn");
             turn_div.innerHTML = turn;
             waitingContainer.style.display = "none";
@@ -105,6 +109,35 @@ function clickHandler(event){
         const variant = document.querySelector('input[name="game-variant"]:checked').getAttribute('id');
         const request = new CreateRequest(variant);
         socket.send(request.toString());
+    }
+}
+
+function changeColor(color){
+    if(color=="BLACK"){
+        return "WHITE";
+    }else{
+        return "BLACK";
+    }
+}
+
+function createBoard(responseBoard, firstField){
+    let i = 0
+    for(let y=7;y>=0;y--){
+        row_div = document.createElement('div');
+        row_div.classList.add('row-'+y,'row');
+        board.appendChild(row_div);
+        if(y==7) firstField = changeColor(firstField);
+        for(let x=0;x<8;x++){
+            if(x!=0) firstField = changeColor(firstField);
+            field = document.createElement('div');
+            field.classList.add('col-'+x,firstField);
+            row_div.appendChild(field);
+            if(responseBoard[x][0][y] == "*" || responseBoard[x][0][y]=="#"){
+                piece = document.createElement('div');
+                piece.innerHTML = responseBoard[x][0][y];
+                field.appendChild(piece);
+            } 
+        }
     }
 }
 

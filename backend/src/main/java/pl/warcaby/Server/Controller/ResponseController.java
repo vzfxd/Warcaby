@@ -16,18 +16,19 @@ public class ResponseController{
         webSocket.send(json.toString());
     }
 
-    public JSONObject joinResponse(String[][] printedBoard, Color color){
+    public JSONObject joinResponse(String[][] printedBoard, Color color, Color firstField){
         JSONObject json = new JSONObject();
         json.put("feedback","game started");
         json.put("board",printedBoard);
         json.put("color",color);
         json.put("turn",Color.WHITE);
+        json.put("firstField",firstField);
         return json;
     }
 
-    public void broadcast(String[][] printedBoard, List<Player> playerList){
+    public void broadcast(String[][] printedBoard, List<Player> playerList,Color firstField){
         for(Player player: playerList){
-            JSONObject response = joinResponse(printedBoard,player.getColor());
+            JSONObject response = joinResponse(printedBoard,player.getColor(),firstField);
             player.getWebSocket().send(response.toString());
         }
     }

@@ -39,6 +39,11 @@ public class GameController {
         return false;
     }
 
+    public Color getFirstField(int game_id){
+        Game game = findGame(game_id);
+        if(game.getBoardType().equals(BoardType.SPANISH) || game.getBoardType().equals(BoardType.GERMAN)) return Color.WHITE; else return Color.BLACK;
+    }
+
     public String[][] printBoard(int game_id){
         Game game = findGame(game_id);
         Field[][] fields = game.getBoardFields();
