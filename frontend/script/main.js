@@ -82,6 +82,14 @@ function establishConnection(url){
             menuContainer.style.display = "none";
             waitingContainer.style.display = "flex";
         }
+        if(response['feedback']=='game started'){
+            let turn = response['turn'];
+            turn_div = document.querySelector(".turn");
+            turn_div.innerHTML = turn;
+            waitingContainer.style.display = "none";
+            menuContainer.style.display = "none";
+            gameContainer.style.display = "flex";
+        }
     });
 }
 

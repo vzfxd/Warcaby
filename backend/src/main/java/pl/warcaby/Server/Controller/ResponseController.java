@@ -21,6 +21,7 @@ public class ResponseController{
         json.put("feedback","game started");
         json.put("board",printedBoard);
         json.put("color",color);
+        json.put("turn",Color.WHITE);
         return json;
     }
 
