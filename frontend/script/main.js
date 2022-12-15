@@ -74,6 +74,7 @@ let socket;
 let selectedPiece;
 let playerColor;
 let possibleMoves;
+let possibleForPiece = [];
 
 function establishConnection(url){
     socket = new WebSocket(url);
@@ -92,7 +93,6 @@ function establishConnection(url){
             let firstField = response['firstField'];
             playerColor = response['color']
             possibleMoves = response['possibleMoves'];
-            console.log(possibleMoves);
             createBoard(board, firstField);
             turn_div = document.querySelector(".turn");
             turn_div.innerHTML = turn;
@@ -156,8 +156,39 @@ function createBoard(responseBoard, firstField){
 }
 
 function pieceHandler(event){
+    undoHighlight(possibleForPiece);
     selectedPiece = event.srcElement;
-    console.log(selectedPiece);
+    let col = selectedPiece.parentNode;
+    let row = col.parentNode;
+    let x = col.classList[0].split('-')[1];
+    let y = row.classList[0].split('-')[1];
+    possibleForPiece = [];
+    for(piece of possibleMoves){
+        if(piece[0][0]==x && piece[0][1]==y){
+            for(field of piece){
+                if(field[0]!=x && field[1]!=y){
+                    possibleForPiece.push(field);
+                }
+            }
+        }
+    }
+    highlightField(possibleForPiece);
+}
+
+function highlightField(possibleForPiece){
+    for(field of possibleForPiece){
+        let fieldToHighlight = document.querySelector(".row-"+field[1]).children[field[0]];
+        fieldToHighlight.style.boxSizing = "border-box";
+        fieldToHighlight.style.border = "thick solid blue";
+    }
+}
+
+function undoHighlight(possibleForPiece){
+    for(field of possibleForPiece){
+        let fieldToHighlight = document.querySelector(".row-"+field[1]).children[field[0]];
+        fieldToHighlight.style.boxSizing = "border-box";
+        fieldToHighlight.style.border = "";
+    }
 }
 
 joinButton.addEventListener("click", clickHandler);
