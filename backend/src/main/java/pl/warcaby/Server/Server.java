@@ -3,8 +3,11 @@ package pl.warcaby.Server;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+import pl.warcaby.Checkers.Color;
+import pl.warcaby.Checkers.Player;
 import pl.warcaby.Server.Controller.GameController;
 import pl.warcaby.Server.Controller.RequestController;
+import pl.warcaby.Server.Controller.ResponseController;
 
 import java.net.InetSocketAddress;
 
@@ -12,6 +15,7 @@ public class Server extends WebSocketServer {
 
     private static final GameController gameController = new GameController();
     private static final RequestController requestController = new RequestController();
+    private static final ResponseController responseController = new ResponseController();
 
     public Server(int port){
         super(new InetSocketAddress(port));
@@ -24,7 +28,13 @@ public class Server extends WebSocketServer {
 
     @Override
     public void onMessage(WebSocket webSocket, String s) {
-        System.out.println(s);
+        String requestType = requestController.getRequestType(s);
+        switch(requestType){
+            case "CREATE":  int game_id = gameController.createGame(new Player(Color.WHITE,webSocket),requestController.getVariant(s));
+                            responseController.createResponse(webSocket,game_id);
+                            break;
+            case "JOIN": gameController.joinGame(new Player(Color.BLACK,webSocket), requestController.getGameId(s));
+        }
     }
 
     @Override

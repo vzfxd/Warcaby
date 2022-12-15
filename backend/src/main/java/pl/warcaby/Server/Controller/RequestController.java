@@ -1,6 +1,7 @@
 package pl.warcaby.Server.Controller;
 
 import org.json.JSONObject;
+import pl.warcaby.Checkers.BoardType;
 
 public class RequestController {
     public String getRequestType(String request){
@@ -13,9 +14,17 @@ public class RequestController {
         return json.getInt("game_id");
     }
 
-    public String getVariant(String request){
+    public BoardType getVariant(String request){
         JSONObject json = new JSONObject(request);
-        return json.getString("variant");
+        String type = json.getString("variant");
+        BoardType boardType;
+        switch(type){
+            case "spanish": boardType = BoardType.SPANISH; break;
+            case "german": boardType = BoardType.GERMAN; break;
+            case "turkish": boardType = BoardType.TURKISH; break;
+            default: boardType = null;
+        }
+        return boardType;
     }
 
     public String getCurrentLocation(String request){

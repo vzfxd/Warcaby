@@ -1,6 +1,5 @@
 package pl.warcaby.Server.Controller;
 
-import pl.warcaby.Checkers.Board;
 import pl.warcaby.Checkers.BoardType;
 import pl.warcaby.Checkers.Player;
 import pl.warcaby.Checkers.Variations.SpanishBoard;
@@ -8,7 +7,6 @@ import pl.warcaby.Server.Game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class GameController {
     List<Game> gameList = new ArrayList<>();
@@ -29,9 +27,11 @@ public class GameController {
 
     public void joinGame(Player player, int game_id){
         Game game = findGame(game_id);
-        game.addPlayer(player);
-        switch(game.getBoardType()){
-            case SPANISH -> game.setBoard(new SpanishBoard(game.getPlayerList().get(0),game.getPlayerList().get(1)));
+        if(game.getPlayerList().size()<2){
+            game.addPlayer(player);
+            switch(game.getBoardType()){
+                case SPANISH -> game.setBoard(new SpanishBoard(game.getPlayerList().get(0),game.getPlayerList().get(1)));
+            }
         }
     }
 }
