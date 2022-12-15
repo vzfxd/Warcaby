@@ -3,6 +3,7 @@ package pl.warcaby.Server;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+import pl.warcaby.Checkers.Board;
 import pl.warcaby.Checkers.Color;
 import pl.warcaby.Checkers.Player;
 import pl.warcaby.Server.Controller.GameController;
@@ -40,7 +41,9 @@ public class Server extends WebSocketServer {
             if(joined){
                 String[][] printedBoard = gameController.printBoard(game_id);
                 List<Player> playerList = gameController.findGame(game_id).getPlayerList();
-                responseController.broadcast(printedBoard,playerList);
+                Color firstField = gameController.getFirstField(game_id);
+                Board board = gameController.getGameBoard(game_id);
+                responseController.broadcast(printedBoard,playerList,firstField,board);
             }
         }
     }

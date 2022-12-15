@@ -35,3 +35,34 @@ html, body {
 .create{
     margin: 0px 20px 20px 20px;
 }
+
+.board{
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.WHITE,.BLACK{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+.BLACK{
+    background-color: black;
+}
+
+.WHITE{
+    background-color: white;
+}
+
+.piece{
+    width: 50px;
+    height: 50px;
+}
