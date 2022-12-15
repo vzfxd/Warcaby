@@ -74,10 +74,10 @@ let socket;
 function establishConnection(url){
     socket = new WebSocket(url);
     socket.addEventListener("message", (event)=>{
-        const response = JSON.parse(event.data);
-        if(response["feedback"]=="game created"){
-            let game_id = response["game_id"];
-            let code = document.querySelector(".code");
+        const response = JSON.parse(event.data)
+        if(response['feedback']=='game created'){
+            let game_id = response['game_id'];
+            let code = document.querySelector('.code');
             code.innerHTML = game_id;
             menuContainer.style.display = "none";
             waitingContainer.style.display = "flex";
