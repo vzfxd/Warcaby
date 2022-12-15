@@ -134,7 +134,13 @@ function createBoard(responseBoard, firstField){
             row_div.appendChild(field);
             if(responseBoard[x][0][y] == "*" || responseBoard[x][0][y]=="#"){
                 piece = document.createElement('div');
-                piece.innerHTML = responseBoard[x][0][y];
+                piece.classList.add("piece");
+                if(responseBoard[x][0][y]=="*"){
+                    piece.style.backgroundColor = "yellow";
+                }else {
+                    piece.style.backgroundColor = "red";
+                }
+                piece.style.borderRadius = "25px";
                 field.appendChild(piece);
             } 
         }
