@@ -1,6 +1,7 @@
 package ControllerTest;
 
 import org.junit.Test;
+import pl.warcaby.Checkers.BoardType;
 import pl.warcaby.Server.Controller.RequestController;
 
 import static org.junit.Assert.assertEquals;
@@ -25,6 +26,6 @@ public class RequestControllerTest {
     public void getVariantTest(){
         RequestController requestController = new RequestController();
         String request = "{\"type\":\"CREATE\",\"variant\":\"spanish\"}";
-        assertEquals("spanish",requestController.getVariant(request));
+        assertEquals(BoardType.SPANISH,requestController.getVariant(request));
     }
 }

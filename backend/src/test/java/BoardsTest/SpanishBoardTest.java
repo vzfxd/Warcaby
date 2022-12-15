@@ -1,5 +1,6 @@
 package BoardsTest;
 
+import org.java_websocket.WebSocket;
 import org.junit.Test;
 import pl.warcaby.Checkers.Board;
 import pl.warcaby.Checkers.Color;

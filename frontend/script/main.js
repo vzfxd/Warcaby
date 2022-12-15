@@ -66,14 +66,32 @@ const requestType = {
 
 const joinButton = document.getElementById("join");
 const createButton = document.getElementById("create");
+const menuContainer = document.querySelector(".menu-container");
+const waitingContainer = document.querySelector(".waiting-container");
+const gameContainer = document.querySelector(".game-container");
 let socket;
 
 function establishConnection(url){
     socket = new WebSocket(url);
-//    socket.addEventListener("message", (event)=>{responseHandler(event)});
+    socket.addEventListener("message", (event)=>{
+        const response = JSON.parse(event.data)
+        if(response['feedback']=='game created'){
+            let game_id = response['game_id'];
+            let code = document.querySelector('.code');
+            code.innerHTML = game_id;
+            menuContainer.style.display = "none";
+            waitingContainer.style.display = "flex";
+        }
+        if(response['feedback']=='game started'){
+            let turn = response['turn'];
+            turn_div = document.querySelector(".turn");
+            turn_div.innerHTML = turn;
+            waitingContainer.style.display = "none";
+            menuContainer.style.display = "none";
+            gameContainer.style.display = "flex";
+        }
+    });
 }
-
-//function responseHandler(event){}
 
 function clickHandler(event){
     const src = event.srcElement;

@@ -64,4 +64,12 @@ public abstract class Board {
      * @param steps Lista zawierająca opis ruchu.*/
     public abstract void move(ArrayList<int[]> steps);
 
+    public Field[][] getFields(){
+        return this.fields;
+    }
+
+    public int[] getSize(){
+        return new int[]{this.width,this.heigth};
+    }
+
 }

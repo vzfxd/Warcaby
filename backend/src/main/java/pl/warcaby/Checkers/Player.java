@@ -1,7 +1,6 @@
 package pl.warcaby.Checkers;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.java_websocket.WebSocket;
 
 @AllArgsConstructor
@@ -18,4 +17,9 @@ public class Player {
     public Color getColor() {
         return color;
     }
+
+    public void setWebSocket(WebSocket webSocket){
+        this.webSocket = webSocket;
+    }
+    public WebSocket getWebSocket() { return this.webSocket;}
 }
