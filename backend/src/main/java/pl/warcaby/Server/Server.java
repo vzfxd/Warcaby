@@ -24,7 +24,7 @@ public class Server extends WebSocketServer {
 
     @Override
     public void onMessage(WebSocket webSocket, String s) {
-        String type = requestController.getRequestType(s);
+        System.out.println(s);
     }
 
     @Override
