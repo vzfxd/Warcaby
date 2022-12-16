@@ -28,4 +28,27 @@ public class GameControllerTest {
         };
         assertEquals(actualBoard,gameController.printBoard(game_id));
     }
+
+    @Test
+    public void victoryTest(){
+        GameController gameController = new GameController();
+        Player whitePlayer = new Player(Color.WHITE);
+        Player blackPlayer = new Player(Color.BLACK);
+        int game_id = gameController.createGame(whitePlayer,BoardType.SPANISH);
+        gameController.joinGame(blackPlayer,game_id);
+        Board board = gameController.findGame(game_id).getBoard();
+;        for(Field[] row: board.getFields()){
+            for(Field field: row){
+                field.setOccupied(null);
+            }
+        }
+
+        board.getFields()[0][0].setOccupied(new Pawn(whitePlayer));
+        board.getFields()[1][1].setOccupied(new Pawn(blackPlayer));
+        Color color = gameController.victory(game_id);
+        System.out.println(color);
+        gameController.move(game_id,new int[]{0,0},new int[]{2,2});
+        color = gameController.victory(game_id);
+        System.out.println(color);
+    }
 }

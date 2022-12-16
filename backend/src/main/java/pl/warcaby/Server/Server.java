@@ -53,9 +53,14 @@ public class Server extends WebSocketServer {
             int game_id = requestController.getGameId(s);
             Game game = gameController.findGame(game_id);
             Color turn = gameController.move(game_id,currentLocation,desiredLocation);
-            String[][] printedBoard = gameController.printBoard(game_id);
-            JSONObject response = responseController.moveResponse(printedBoard,turn);
-            responseController.broadcast(game.getPlayerList(),response,game.getBoard());
+            Color victory = gameController.victory(game_id);
+            if(victory == null){
+                String[][] printedBoard = gameController.printBoard(game_id);
+                JSONObject response = responseController.moveResponse(printedBoard,turn);
+                responseController.broadcast(game.getPlayerList(),response,game.getBoard());
+            }else{
+                responseController.gameFinished(game.getPlayerList(),victory);
+            }
         }
     }
 

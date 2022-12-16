@@ -75,12 +75,21 @@ public class GameController {
         Game game = findGame(game_id);
         Board board = game.getBoard();
         int iloscBic = board.checkBestMoves(board.getTurn()).get(0).get(0)[0];
-        System.out.println(iloscBic);
         if(iloscBic<2) board.changeTurn();
         ArrayList<int[]> steps = new ArrayList<>();
         steps.add(currentLocation);
         steps.add(desiredLocation);
         board.move(steps);
         return board.getTurn();
+    }
+
+    public Color victory(int game_id){
+        Game game = findGame(game_id);
+        Board board = game.getBoard();
+        Color turn = board.getTurn();
+        if(board.checkBestMoves(turn).size()==0){
+            if(turn.equals(Color.WHITE)) return Color.BLACK; else return Color.WHITE;
+        }
+        return null;
     }
 }

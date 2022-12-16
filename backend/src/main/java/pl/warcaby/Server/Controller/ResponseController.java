@@ -46,4 +46,13 @@ public class ResponseController{
             player.getWebSocket().send(response.toString());
         }
     }
+
+    public void gameFinished(List<Player> playerList, Color color){
+        JSONObject json =  new JSONObject();
+        json.put("feedback","game finished");
+        json.put("winner",color);
+        for(Player player: playerList){
+            player.getWebSocket().send(json.toString());
+        }
+    }
 }

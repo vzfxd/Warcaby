@@ -79,6 +79,7 @@ let possibleForPiece = [];
 let game_id;
 let firstField;
 let turn;
+let result
 
 function establishConnection(url){
     socket = new WebSocket(url);
@@ -109,6 +110,16 @@ function establishConnection(url){
             turn_div.innerHTML = turn;
             board.innerHTML = '';
             createBoard(response['board'],firstField);
+        }
+        if(response['feedback']=='game finished'){
+            console.log("finished");
+            let winner = response['winner'];
+            if(winner==playerColor){
+                result = "YOU WON"
+            }else{
+                result = "YOU LOST"
+            }
+            gameContainer.innerHTML = "<h1>"+result+"</h1>"
         }
     });
 }
