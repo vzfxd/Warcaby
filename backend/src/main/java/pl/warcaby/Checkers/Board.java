@@ -38,10 +38,11 @@ public abstract class Board {
                         if (moves.get(0)[0] > bestMoveLength) {
                             bestMoves = new ArrayList<>();
                             bestMoveLength = moves.get(0)[0];
-                            moves.remove(0);
                             bestMoves.add(moves);
-                        } else if (moves.get(0)[0] == bestMoveLength) {
-                            moves.remove(0);
+                        }else if(bestMoveLength == 0 && moves.get(0)[0]==0){
+                            bestMoves.add(moves);
+                        }
+                        else if (moves.get(0)[0] == bestMoveLength) {
                             bestMoves.add(moves);
                         }
                     }

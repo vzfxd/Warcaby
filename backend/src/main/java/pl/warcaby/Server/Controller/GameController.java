@@ -74,11 +74,13 @@ public class GameController {
     public Color move(int game_id,int[] currentLocation,int[] desiredLocation) {
         Game game = findGame(game_id);
         Board board = game.getBoard();
+        int iloscBic = board.checkBestMoves(board.getTurn()).get(0).get(0)[0];
+        System.out.println(iloscBic);
+        if(iloscBic<2) board.changeTurn();
         ArrayList<int[]> steps = new ArrayList<>();
         steps.add(currentLocation);
         steps.add(desiredLocation);
         board.move(steps);
-        board.changeTurn();
         return board.getTurn();
     }
 }
