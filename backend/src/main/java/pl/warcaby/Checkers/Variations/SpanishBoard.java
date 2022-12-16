@@ -367,7 +367,7 @@ public class SpanishBoard extends Board {
 
                 nx = x+1;
                 ny = y-1;
-                while(nx>0 && ny>0){
+                while(nx<7 && ny>0){
                     if(this.fields[nx][ny].getPawnColor()==pawnColor){break;}
                     if(this.fields[nx][ny].getPawnColor()==enemyPawnColor && this.fields[nx+1][ny-1].getPawnColor()==null){
                         ArrayList<int[]> move = new ArrayList<>();
@@ -405,9 +405,10 @@ public class SpanishBoard extends Board {
     }
     /**Metoda wykonujaca podane ruchy na planszy. Jezeli wystapilo bicie usuwa zbite pionki.
      *
-     * @param steps Lista która zawiera informacje na temat ruchu w takiej formie jak zwraca metoda checkBestPawnMoves
-     * tzn. index0 - (ilosc bic,ilosc bic), index1 - 'pozycja startowa' - (x,y),
-     * kazdy kolejny indexn- 'pozycja po wykonaniu n-1 ruchu' (x,y)*/
+     * @param steps Lista która zawiera informacje na temat ruchu w takiej formie:
+     * index0 - 'pozycja startowa' - (x,y),
+     * index1 - 'pozycja po wykonaniu ruchu' (x,y)
+     * */
     @Override
     public void move(ArrayList<int[]> steps) {
         Pawn pawn = this.fields[steps.get(0)[0]][steps.get(0)[1]].getOccupied();
