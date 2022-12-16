@@ -9,18 +9,17 @@ public class Field {
     Pawn occupied = null;
 
     public Color getPawnColor() {
-        if (occupied != null) {
-            return this.occupied.getColor();
-        }
+        if (occupied != null) {return this.occupied.getColor();}
         return null;
     }
 
     public void pawnTypeUpgrade(){
-        this.occupied.setType(PawnType.QUEEN);
+        if(this.occupied!=null) {this.occupied.setType(PawnType.QUEEN);}
     }
 
     public PawnType getPawnType(){
-        return this.occupied.getType();
+        if(this.occupied!=null){return this.occupied.getType();}
+        return null;
     }
 
     public Pawn getOccupied(){ return this.occupied;}
