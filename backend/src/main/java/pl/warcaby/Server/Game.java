@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Random;
 
 public class Game {
-    private int game_id;
-    private List<Player> playerList;
+    private final int game_id;
+    private final List<Player> playerList;
     private Board board;
-    private BoardType boardType;
+    private final BoardType boardType;
 
     public Game(BoardType boardType){
         Random rand = new Random();
