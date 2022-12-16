@@ -70,10 +70,15 @@ const menuContainer = document.querySelector(".menu-container");
 const waitingContainer = document.querySelector(".waiting-container");
 const gameContainer = document.querySelector(".game-container");
 const board = document.querySelector(".board");
+const turn_div = document.querySelector(".turn");
 let socket;
 let selectedPiece;
 let playerColor;
 let possibleMoves;
+let possibleForPiece = [];
+let game_id;
+let firstField;
+let turn;
 
 function establishConnection(url){
     socket = new WebSocket(url);
@@ -87,18 +92,23 @@ function establishConnection(url){
             waitingContainer.style.display = "flex";
         }
         if(response['feedback']=='game started'){
-            let turn = response['turn'];
-            let board = response['board'];
-            let firstField = response['firstField'];
+            turn = response['turn'];
+            firstField = response['firstField'];
             playerColor = response['color']
             possibleMoves = response['possibleMoves'];
-            console.log(possibleMoves);
-            createBoard(board, firstField);
-            turn_div = document.querySelector(".turn");
+            game_id = response['game_id'];
+            createBoard(response['board'], firstField);
             turn_div.innerHTML = turn;
             waitingContainer.style.display = "none";
             menuContainer.style.display = "none";
             gameContainer.style.display = "flex";
+        }
+        if(response['feedback']=='player moved'){
+            possibleMoves = response['possibleMoves'];
+            turn = response['turn'];
+            turn_div.innerHTML = turn;
+            board.innerHTML = '';
+            createBoard(response['board'],firstField);
         }
     });
 }
@@ -136,6 +146,7 @@ function createBoard(responseBoard, firstField){
         for(let x=0;x<8;x++){
             if(x!=0) firstField = changeColor(firstField);
             field = document.createElement('div');
+            field.addEventListener("click",fieldHandler);
             field.classList.add('col-'+x,firstField);
             row_div.appendChild(field);
             if(responseBoard[x][0][y] == "*" || responseBoard[x][0][y]=="#"){
@@ -155,9 +166,73 @@ function createBoard(responseBoard, firstField){
     }
 }
 
+function getFieldLocation(field){
+    let x = field.classList[0].split('-')[1];
+    let row = field.parentNode;
+    let y = row.classList[0].split('-')[1];
+    return [x,y];
+}
+
+function getPieceLocation(piece){
+    let col = piece.parentNode;
+    let row = col.parentNode;
+    let x = col.classList[0].split('-')[1];
+    let y = row.classList[0].split('-')[1];
+    return [x,y];
+}
+
+function fieldHandler(event){
+    let field = event.srcElement;
+    if(selectedPiece && field.classList[0].split('-')[0]=="col"){
+        let [x,y] = getFieldLocation(field);
+        for(item of possibleForPiece){
+            if(item[0]==x && item[1]==y){
+                let [pieceX,pieceY] = getPieceLocation(selectedPiece)
+                msg = {
+                    "type":"MOVE",
+                    "game_id":game_id,
+                    "currentLocationX":pieceX,
+                    "currentLocationY":pieceY,
+                    "desiredLocationX":x,
+                    "desiredLocationY":y
+            }
+                socket.send(JSON.stringify(msg));
+            }
+        }
+    }
+}
+
 function pieceHandler(event){
+    undoHighlight(possibleForPiece);
     selectedPiece = event.srcElement;
-    console.log(selectedPiece);
+    let [x,y] = getPieceLocation(selectedPiece);
+    possibleForPiece = [];
+    for(piece of possibleMoves){
+        if(piece[0][0]==x && piece[0][1]==y){
+            for(field of piece){
+                if(field[0]!=x && field[1]!=y){
+                    possibleForPiece.push(field);
+                }
+            }
+        }
+    }
+    highlightField(possibleForPiece);
+}
+
+function highlightField(possibleForPiece){
+    for(field of possibleForPiece){
+        let fieldToHighlight = document.querySelector(".row-"+field[1]).children[field[0]];
+        fieldToHighlight.style.boxSizing = "border-box";
+        fieldToHighlight.style.border = "thick solid blue";
+    }
+}
+
+function undoHighlight(possibleForPiece){
+    for(field of possibleForPiece){
+        let fieldToHighlight = document.querySelector(".row-"+field[1]).children[field[0]];
+        fieldToHighlight.style.boxSizing = "border-box";
+        fieldToHighlight.style.border = "";
+    }
 }
 
 joinButton.addEventListener("click", clickHandler);

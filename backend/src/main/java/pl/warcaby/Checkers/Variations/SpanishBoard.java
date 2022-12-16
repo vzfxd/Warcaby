@@ -96,7 +96,7 @@ public class SpanishBoard extends Board {
 
                 //ruch w lewo
 
-                if(x>0 && y<7 && this.fields[x-1][y+1].getPawnColor()==null){
+                if(x>0 && this.fields[x-1][y+1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
                     move.add(new int[]{0, 0});
                     move.add(new int[]{x,y});
@@ -105,7 +105,7 @@ public class SpanishBoard extends Board {
                 }
 
                 //ruch w prawo
-                if(x<7 && y<7 && this.fields[x+1][y+1].getPawnColor()==null){
+                if(x<7 && this.fields[x+1][y+1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
                     move.add(new int[]{0, 0});
                     move.add(new int[]{x,y});
@@ -115,7 +115,7 @@ public class SpanishBoard extends Board {
 
                 //bicie w lewo
 
-                if(x>1 && y<6 && this.fields[x-1][y+1].getPawnColor()==enemyPawnColor && this.fields[x-2][y+2].getPawnColor()==null){
+                if(x>1 && this.fields[x-1][y+1].getPawnColor()==enemyPawnColor && this.fields[x-2][y+2].getPawnColor()==null){
                     this.fields[x-2][y+2].setOccupied(this.fields[x][y].getOccupied());
                     ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{x-2,y+2});
                     int moreways = 0;
@@ -142,7 +142,7 @@ public class SpanishBoard extends Board {
 
                 //bicie w prawo
 
-                if(x<6 && y<6 && this.fields[x+1][y+1].getPawnColor()==enemyPawnColor && this.fields[x+2][y+2].getPawnColor()==null){
+                if(x<6 && this.fields[x+1][y+1].getPawnColor()==enemyPawnColor && this.fields[x+2][y+2].getPawnColor()==null){
                     this.fields[x+2][y+2].setOccupied(this.fields[x][y].getOccupied());
                     ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{x+2,y+2});
                     int moreways = 0;
@@ -174,7 +174,7 @@ public class SpanishBoard extends Board {
 
                 //ruch w lewo
 
-                if(x>0 && y>0 && this.fields[x-1][y-1].getPawnColor()==null){
+                if(x>0 && this.fields[x-1][y-1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
                     move.add(new int[]{0, 0});
                     move.add(new int[]{x,y});
@@ -183,7 +183,7 @@ public class SpanishBoard extends Board {
                 }
 
                 //ruch w prawo
-                if(x<7 && y>0 && this.fields[x+1][y-1].getPawnColor()==null){
+                if(x<7 && this.fields[x+1][y-1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
                     move.add(new int[]{0, 0});
                     move.add(new int[]{x,y});
@@ -193,7 +193,7 @@ public class SpanishBoard extends Board {
 
                 //bicie w lewo
 
-                if(x>1 && y> 1 && this.fields[x-1][y+1].getPawnColor()==enemyPawnColor && this.fields[x-2][y-2].getPawnColor()==null){
+                if(x>1 && this.fields[x-1][y-1].getPawnColor()==enemyPawnColor && this.fields[x-2][y-2].getPawnColor()==null){
                     this.fields[x-2][y-2].setOccupied(this.fields[x][y].getOccupied());
                     ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{x-2,y-2});
                     int moreways = 0;
@@ -220,7 +220,7 @@ public class SpanishBoard extends Board {
 
                 //bicie w prawo
 
-                if(x<6 && y>1 && this.fields[x+1][y-1].getPawnColor()==enemyPawnColor && this.fields[x+2][y-2].getPawnColor()==null){
+                if(x<6 && this.fields[x+1][y-1].getPawnColor()==enemyPawnColor && this.fields[x+2][y-2].getPawnColor()==null){
                     this.fields[x+2][y-2].setOccupied(this.fields[x][y].getOccupied());
                     ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{x+2,y-2});
                     int moreways = 0;
@@ -410,21 +410,16 @@ public class SpanishBoard extends Board {
      * kazdy kolejny indexn- 'pozycja po wykonaniu n-1 ruchu' (x,y)*/
     @Override
     public void move(ArrayList<int[]> steps) {
-        Pawn pawn = this.fields[steps.get(1)[0]][steps.get(1)[1]].getOccupied();
-        this.fields[steps.get(1)[0]][steps.get(1)[1]].setOccupied(null);
+        Pawn pawn = this.fields[steps.get(0)[0]][steps.get(0)[1]].getOccupied();
+        this.fields[steps.get(0)[0]][steps.get(0)[1]].setOccupied(null);
         this.fields[steps.get(steps.size()-1)[0]][steps.get(steps.size()-1)[1]].setOccupied(pawn);
-        for(int i=1;i<steps.size()-1;i++){        //usuwanie zbitych pionkow
-            int x1 = steps.get(i)[0];
-            int y1 = steps.get(i)[1];
-            int x2 = steps.get(i+1)[0];
-            int y2 = steps.get(i+1)[1];
-            if(y2==7){
-                this.fields[steps.get(steps.size()-1)[0]][steps.get(steps.size()-1)[1]].pawnTypeUpgrade();
-            }
+            int x1 = steps.get(0)[0];
+            int y1 = steps.get(0)[1];
+            int x2 = steps.get(1)[0];
+            int y2 = steps.get(1)[1];
             if(x1<x2 && y1>y2){this.fields[x2-1][y2+1].setOccupied(null);}                 //zbicie/ruch od gornej lewej
             else if(x1<x2 && y1<y2){this.fields[x2-1][y2-1].setOccupied(null);}            //zbicie/ruch od dolnej lewej
             else if(x1>x2 && y1>y2){this.fields[x2+1][y2+1].setOccupied(null);}            //zbicie/ruch od gornej prawej
-            else if(x1>x2 && y1<y2){this.fields[x2+1][y2-1].setOccupied(null);}            //zbicie/ruch od dolnej prawej
-        }
+            else if(x1>x2 && y1<y2){this.fields[x2+1][y2-1].setOccupied(null);}            //zbicie/ruch od dolnej prawe
     }
 }

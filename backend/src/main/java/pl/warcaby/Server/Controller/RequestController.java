@@ -1,5 +1,6 @@
 package pl.warcaby.Server.Controller;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import pl.warcaby.Checkers.BoardType;
 
@@ -27,11 +28,17 @@ public class RequestController {
         return boardType;
     }
 
-    public String getCurrentLocation(String request){
-        return "xd";
+    public int[] getCurrentLocation(String request){
+        JSONObject json = new JSONObject(request);
+        int x = json.getInt("currentLocationX");
+        int y = json.getInt("currentLocationY");
+        return new int[]{x,y};
     }
 
-    public String getDesiredLocation(String request){
-        return "xd";
+    public int[] getDesiredLocation(String request){
+        JSONObject json = new JSONObject(request);
+        int x = json.getInt("desiredLocationX");
+        int y = json.getInt("desiredLocationY");
+        return new int[]{x,y};
     }
 }

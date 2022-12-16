@@ -59,6 +59,11 @@ public abstract class Board {
             this.turn = Color.BLACK;
         }
     }
+
+    public Color getTurn(){
+        return this.turn;
+    }
+
     /**Abstrakcyjna metoda wykonywania ruchu na planszy.
      *
      * @param steps Lista zawierająca opis ruchu.*/
