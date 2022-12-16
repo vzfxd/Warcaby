@@ -242,7 +242,7 @@ public class SpanishBoard extends Board {
                         move.add(new int[]{x+2,y-2});
                         allMoves.add(move);
                     }
-                    this.fields[x-2][y+2].setOccupied(null);
+                    this.fields[x+2][y-2].setOccupied(null);
                 }
             }
         }
