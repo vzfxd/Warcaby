@@ -259,9 +259,10 @@ public class SpanishBoard extends Board {
                         ArrayList<int[]> move = new ArrayList<>();
                         int moreways = 0;
                         this.fields[nx-1][ny+1].setOccupied(this.fields[x][y].getOccupied());
+                        this.fields[nx+1][ny-1].setOccupied(this.fields[x][y].getOccupied()); //blokuje ruch w ta sama strone
                         ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{nx-1,ny+1});
                         for(ArrayList<int[]> mv : fullMove){
-                            if(mv.get(0)[0]>0){
+                            if(mv!=null && mv.get(0)[0]>0){
                                 moreways++;
                                 move.add(new int[]{mv.get(0)[0]+1, mv.get(0)[0]+1});
                                 move.add(pawnLocation);
@@ -275,6 +276,7 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{nx-1,ny+1});
                         }
                         this.fields[nx-1][ny+1].setOccupied(null);
+                        this.fields[nx+1][ny-1].setOccupied(null);
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -297,9 +299,10 @@ public class SpanishBoard extends Board {
                         ArrayList<int[]> move = new ArrayList<>();
                         int moreways = 0;
                         this.fields[nx-1][ny-1].setOccupied(this.fields[x][y].getOccupied());
+                        this.fields[nx+1][ny+1].setOccupied(this.fields[x][y].getOccupied());
                         ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{nx-1,ny-1});
                         for(ArrayList<int[]> mv : fullMove){
-                            if(mv.get(0)[0]>0){
+                            if(mv!=null && mv.get(0)[0]>0){
                                 moreways++;
                                 move.add(new int[]{mv.get(0)[0]+1, mv.get(0)[0]+1});
                                 move.add(pawnLocation);
@@ -313,6 +316,7 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{nx-1,ny-1});
                         }
                         this.fields[nx-1][ny-1].setOccupied(null);
+                        this.fields[nx+1][ny+1].setOccupied(null);
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -335,9 +339,10 @@ public class SpanishBoard extends Board {
                         ArrayList<int[]> move = new ArrayList<>();
                         int moreways = 0;
                         this.fields[nx+1][ny+1].setOccupied(this.fields[x][y].getOccupied());
+                        this.fields[nx-1][ny-1].setOccupied(this.fields[x][y].getOccupied());
                         ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{nx+1,ny+1});
                         for(ArrayList<int[]> mv : fullMove){
-                            if(mv.get(0)[0]>0){
+                            if(mv!=null && mv.get(0)[0]>0){
                                 moreways++;
                                 move.add(new int[]{mv.get(0)[0]+1, mv.get(0)[0]+1});
                                 move.add(pawnLocation);
@@ -351,6 +356,7 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{nx+1,ny+1});
                         }
                         this.fields[nx+1][ny+1].setOccupied(null);
+                        this.fields[nx-1][ny-1].setOccupied(null);
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -373,9 +379,10 @@ public class SpanishBoard extends Board {
                         ArrayList<int[]> move = new ArrayList<>();
                         int moreways = 0;
                         this.fields[nx+1][ny-1].setOccupied(this.fields[x][y].getOccupied());
+                        this.fields[nx-1][ny+1].setOccupied(this.fields[x][y].getOccupied());
                         ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{nx+1,ny-1});
                         for(ArrayList<int[]> mv : fullMove){
-                            if(mv.get(0)[0]>0){
+                            if(mv!=null && mv.get(0)[0]>0){
                                 moreways++;
                                 move.add(new int[]{mv.get(0)[0]+1, mv.get(0)[0]+1});
                                 move.add(pawnLocation);
@@ -389,6 +396,7 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{nx+1,ny-1});
                         }
                         this.fields[nx+1][ny-1].setOccupied(null);
+                        this.fields[nx-1][ny+1].setOccupied(null);
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -413,12 +421,12 @@ public class SpanishBoard extends Board {
     public void move(ArrayList<int[]> steps) {
         Pawn pawn = this.fields[steps.get(0)[0]][steps.get(0)[1]].getOccupied();
         this.fields[steps.get(0)[0]][steps.get(0)[1]].setOccupied(null);
-        this.fields[steps.get(steps.size()-1)[0]][steps.get(steps.size()-1)[1]].setOccupied(pawn);
+        this.fields[steps.get(1)[0]][steps.get(1)[1]].setOccupied(pawn);
             int x1 = steps.get(0)[0];
             int y1 = steps.get(0)[1];
             int x2 = steps.get(1)[0];
             int y2 = steps.get(1)[1];
-            if(y2==7){
+            if(y2==7 || y2==0){
                 this.fields[x2][y2].pawnTypeUpgrade();
             }
             if(x1<x2 && y1>y2){this.fields[x2-1][y2+1].setOccupied(null);}                 //zbicie/ruch od gornej lewej
