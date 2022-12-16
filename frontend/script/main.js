@@ -196,6 +196,7 @@ function fieldHandler(event){
                     "desiredLocationX":x,
                     "desiredLocationY":y
             }
+                selectedPiece = null;
                 socket.send(JSON.stringify(msg));
             }
         }
