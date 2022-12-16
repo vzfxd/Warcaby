@@ -410,8 +410,8 @@ public class SpanishBoard extends Board {
      * kazdy kolejny indexn- 'pozycja po wykonaniu n-1 ruchu' (x,y)*/
     @Override
     public void move(ArrayList<int[]> steps) {
-        Pawn pawn = this.fields[steps.get(1)[0]][steps.get(1)[1]].getOccupied();
-        this.fields[steps.get(1)[0]][steps.get(1)[1]].setOccupied(null);
+        Pawn pawn = this.fields[steps.get(0)[0]][steps.get(0)[1]].getOccupied();
+        this.fields[steps.get(0)[0]][steps.get(0)[1]].setOccupied(null);
         this.fields[steps.get(steps.size()-1)[0]][steps.get(steps.size()-1)[1]].setOccupied(pawn);
         for(int i=1;i<steps.size()-1;i++){        //usuwanie zbitych pionkow
             int x1 = steps.get(i)[0];

@@ -70,4 +70,15 @@ public class GameController {
         }
         return printedBoard;
     }
+
+    public Color move(int game_id,int[] currentLocation,int[] desiredLocation) {
+        Game game = findGame(game_id);
+        Board board = game.getBoard();
+        ArrayList<int[]> steps = new ArrayList<>();
+        steps.add(currentLocation);
+        steps.add(desiredLocation);
+        board.move(steps);
+        board.changeTurn();
+        return board.getTurn();
+    }
 }
