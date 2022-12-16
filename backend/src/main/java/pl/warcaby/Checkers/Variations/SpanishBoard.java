@@ -280,11 +280,13 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{1,1});
                             move.add(pawnLocation);
                             move.add(new int[]{nx-1,ny+1});
+                            allMoves.add(move);
                         }
                         this.fields[nx-1][ny+1].setOccupied(null);
                         if(nx+1!=x && ny-1!=y) {
                             this.fields[nx + 1][ny - 1].setOccupied(null);
                         }
+                        break;
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -322,11 +324,13 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{1,1});
                             move.add(pawnLocation);
                             move.add(new int[]{nx-1,ny-1});
+                            allMoves.add(move);
                         }
                         this.fields[nx-1][ny-1].setOccupied(null);
                         if(nx+1!=x && ny+1!=y) {
                             this.fields[nx + 1][ny + 1].setOccupied(null);
                         }
+                        break;
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -364,11 +368,13 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{1,1});
                             move.add(pawnLocation);
                             move.add(new int[]{nx+1,ny+1});
+                            allMoves.add(move);
                         }
                         this.fields[nx+1][ny+1].setOccupied(null);
                         if(nx-1!=x && ny-1!=y) {
                             this.fields[nx - 1][ny - 1].setOccupied(null);
                         }
+                        break;
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -406,11 +412,13 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{1,1});
                             move.add(pawnLocation);
                             move.add(new int[]{nx+1,ny-1});
+                            allMoves.add(move);
                         }
                         this.fields[nx+1][ny-1].setOccupied(null);
                         if(nx-1!=x && ny+1!=y) {
                             this.fields[nx - 1][ny + 1].setOccupied(null);
                         }
+                        break;
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
