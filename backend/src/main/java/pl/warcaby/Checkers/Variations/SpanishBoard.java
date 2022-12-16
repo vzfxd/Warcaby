@@ -288,6 +288,9 @@ public class SpanishBoard extends Board {
                         }
                         break;
                     }
+                    if(this.fields[nx][ny].getPawnColor()==enemyPawnColor && this.fields[nx-1][ny+1].getPawnColor()==enemyPawnColor){
+                        break;
+                    }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
                         move.add(new int[]{0,0});
@@ -330,6 +333,9 @@ public class SpanishBoard extends Board {
                         if(nx+1!=x && ny+1!=y) {
                             this.fields[nx + 1][ny + 1].setOccupied(null);
                         }
+                        break;
+                    }
+                    if(this.fields[nx][ny].getPawnColor()==enemyPawnColor && this.fields[nx-1][ny-1].getPawnColor()==enemyPawnColor){
                         break;
                     }
                     else{
@@ -376,6 +382,9 @@ public class SpanishBoard extends Board {
                         }
                         break;
                     }
+                    if(this.fields[nx][ny].getPawnColor()==enemyPawnColor && this.fields[nx+1][ny+1].getPawnColor()==enemyPawnColor){
+                        break;
+                    }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
                         move.add(new int[]{0,0});
@@ -418,6 +427,9 @@ public class SpanishBoard extends Board {
                         if(nx-1!=x && ny+1!=y) {
                             this.fields[nx - 1][ny + 1].setOccupied(null);
                         }
+                        break;
+                    }
+                    if(this.fields[nx][ny].getPawnColor()==enemyPawnColor && this.fields[nx+1][ny-1].getPawnColor()==enemyPawnColor){
                         break;
                     }
                     else{
