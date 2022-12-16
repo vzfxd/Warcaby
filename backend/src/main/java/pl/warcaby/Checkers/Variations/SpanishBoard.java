@@ -73,6 +73,20 @@ public class SpanishBoard extends Board {
         }
         else return null;
     }
+    /**Metoda tworzaca mozliwosc pojedynczego ruchu dla pionka królowej.
+     *
+     * @param pawnlocation lokalizacja początkowa pionka
+     * @param newx wspołrzędna x na która może zostac wykonany ruch
+     * @param newy wspołrzędna y na którą moze zostac wykonany ruch
+     * @return utworzony z podanych parametrow pojedynczy ruch.
+     * */
+    private ArrayList<int[]> addLastQueenMove(int[] pawnlocation, int newx, int newy){
+        ArrayList<int[]> move = new ArrayList<>();
+        move.add(new int[]{0,0});
+        move.add(pawnlocation);
+        move.add(new int[]{newx, newy});
+        return move;
+    }
     /**Metoda znajdująca rekurencyjnie wszystkie możliwe zestawy ruchów dla pionka na podanej lokalizacji.
      *
      * @param pawnLocation lokalizacja pionka na planszy int[]{x, y}
@@ -292,13 +306,16 @@ public class SpanishBoard extends Board {
                         break;
                     }
                     else{
-                        ArrayList<int[]> move = new ArrayList<>();
-                        move.add(new int[]{0,0});
-                        move.add(pawnLocation);
-                        move.add(new int[]{nx,ny});
+                        ArrayList<int[]> move = addLastQueenMove(pawnLocation,nx,ny);
                         allMoves.add(move);
                         nx--;
                         ny++;
+                        if(ny==7 || nx==0){
+                            if(this.fields[nx][ny].getPawnColor()==null){
+                                move = addLastQueenMove(pawnLocation, nx ,ny);
+                                allMoves.add(move);
+                            }
+                        }
                     }
                 }
 
@@ -339,13 +356,16 @@ public class SpanishBoard extends Board {
                         break;
                     }
                     else{
-                        ArrayList<int[]> move = new ArrayList<>();
-                        move.add(new int[]{0,0});
-                        move.add(pawnLocation);
-                        move.add(new int[]{nx,ny});
+                        ArrayList<int[]> move = addLastQueenMove(pawnLocation,nx,ny);
                         allMoves.add(move);
                         nx--;
                         ny--;
+                        if(ny==0 || nx==0){
+                            if(this.fields[nx][ny].getPawnColor()==null){
+                                move = addLastQueenMove(pawnLocation, nx ,ny);
+                                allMoves.add(move);
+                            }
+                        }
                     }
                 }
 
@@ -386,13 +406,16 @@ public class SpanishBoard extends Board {
                         break;
                     }
                     else{
-                        ArrayList<int[]> move = new ArrayList<>();
-                        move.add(new int[]{0,0});
-                        move.add(pawnLocation);
-                        move.add(new int[]{nx,ny});
+                        ArrayList<int[]> move = addLastQueenMove(pawnLocation,nx,ny);
                         allMoves.add(move);
                         nx++;
                         ny++;
+                        if(ny==7 || nx==7){
+                            if(this.fields[nx][ny].getPawnColor()==null){
+                                move = addLastQueenMove(pawnLocation, nx ,ny);
+                                allMoves.add(move);
+                            }
+                        }
                     }
                 }
 
@@ -433,13 +456,16 @@ public class SpanishBoard extends Board {
                         break;
                     }
                     else{
-                        ArrayList<int[]> move = new ArrayList<>();
-                        move.add(new int[]{0,0});
-                        move.add(pawnLocation);
-                        move.add(new int[]{nx,ny});
+                        ArrayList<int[]> move = addLastQueenMove(pawnLocation,nx,ny);
                         allMoves.add(move);
                         nx++;
                         ny--;
+                        if(ny==0 || nx==7){
+                            if(this.fields[nx][ny].getPawnColor()==null){
+                                move = addLastQueenMove(pawnLocation, nx ,ny);
+                                allMoves.add(move);
+                            }
+                        }
                     }
                 }
         }
