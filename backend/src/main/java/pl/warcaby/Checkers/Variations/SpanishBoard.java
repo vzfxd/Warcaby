@@ -48,6 +48,9 @@ public class SpanishBoard extends Board {
         bestMoves.add(pawnLocation);
         if(this.fields[x][y].getPawnColor()==this.turn){
             ArrayList<ArrayList<int[]>> allMoves = getAllMoves(pawnLocation);
+            if(allMoves==null){
+                return null;
+            }
             for (ArrayList<int[]> move : allMoves) {
                 int len = move.get(0)[0];
                 if (len > bestMoveLength) {
@@ -79,6 +82,9 @@ public class SpanishBoard extends Board {
     protected ArrayList<ArrayList<int[]>> getAllMoves(int[] pawnLocation) {
         int x = pawnLocation[0];
         int y = pawnLocation[1];
+        if(this.fields[x][y].getOccupied()==null){
+            return null;
+        }
         Color pawnColor = this.fields[x][y].getPawnColor();
         PawnType pawnType = this.fields[x][y].getPawnType();
         ArrayList<ArrayList<int[]>> allMoves = new ArrayList<>();
