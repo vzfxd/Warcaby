@@ -282,7 +282,9 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{nx-1,ny+1});
                         }
                         this.fields[nx-1][ny+1].setOccupied(null);
-                        this.fields[nx+1][ny-1].setOccupied(null);
+                        if(nx+1!=x && ny-1!=y) {
+                            this.fields[nx + 1][ny - 1].setOccupied(null);
+                        }
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -322,7 +324,9 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{nx-1,ny-1});
                         }
                         this.fields[nx-1][ny-1].setOccupied(null);
-                        this.fields[nx+1][ny+1].setOccupied(null);
+                        if(nx+1!=x && ny+1!=y) {
+                            this.fields[nx + 1][ny + 1].setOccupied(null);
+                        }
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -362,7 +366,9 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{nx+1,ny+1});
                         }
                         this.fields[nx+1][ny+1].setOccupied(null);
-                        this.fields[nx-1][ny-1].setOccupied(null);
+                        if(nx-1!=x && ny-1!=y) {
+                            this.fields[nx - 1][ny - 1].setOccupied(null);
+                        }
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
@@ -402,7 +408,9 @@ public class SpanishBoard extends Board {
                             move.add(new int[]{nx+1,ny-1});
                         }
                         this.fields[nx+1][ny-1].setOccupied(null);
-                        this.fields[nx-1][ny+1].setOccupied(null);
+                        if(nx-1!=x && ny+1!=y) {
+                            this.fields[nx - 1][ny + 1].setOccupied(null);
+                        }
                     }
                     else{
                         ArrayList<int[]> move = new ArrayList<>();
