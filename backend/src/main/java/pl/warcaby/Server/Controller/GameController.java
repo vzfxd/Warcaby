@@ -26,7 +26,7 @@ public class GameController {
 
     public Boolean joinGame(Player player, int game_id){
         Game game = findGame(game_id);
-        if(game.getPlayerList().size()<2){
+        if(game!=null && game.getPlayerList().size()<2){
             game.addPlayer(player);
             switch(game.getBoardType()){
                 case SPANISH -> game.setBoard(new SpanishBoard(game.getPlayerList().get(0),game.getPlayerList().get(1)));
