@@ -42,6 +42,16 @@ public abstract class Board {
                             move.add(moves.get(1));
                             move.add(moves.get(2));
                             bestMoveLength = moves.get(0)[0];
+                            if(moves.get(0)[0]>1){
+                                for(int i=1;i<(moves.size()/bestMoveLength)-1;i++){
+                                    move.add(moves.get(2+(i*bestMoveLength)));
+                                }
+                            }
+                            else{
+                                for(int i=3;i<moves.size();i++){
+                                    move.add(moves.get(i));
+                                }
+                            }
                             bestMoves.add(move);
                         }else if(bestMoveLength == 0 && moves.get(0)[0]==0){
                             bestMoves.add(moves);
@@ -51,6 +61,9 @@ public abstract class Board {
                             move.add(moves.get(0));
                             move.add(moves.get(1));
                             move.add(moves.get(2));
+                            for(int i=3;i<moves.size();i++){
+                                move.add(moves.get(i));
+                            }
                             bestMoves.add(move);
                         }
                     }
