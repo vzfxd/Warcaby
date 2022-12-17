@@ -37,13 +37,21 @@ public abstract class Board {
                     if(moves != null && moves.size() != 0) {
                         if (moves.get(0)[0] > bestMoveLength) {
                             bestMoves = new ArrayList<>();
+                            ArrayList<int[]> move = new ArrayList<>();
+                            move.add(moves.get(0));
+                            move.add(moves.get(1));
+                            move.add(moves.get(2));
                             bestMoveLength = moves.get(0)[0];
-                            bestMoves.add(moves);
+                            bestMoves.add(move);
                         }else if(bestMoveLength == 0 && moves.get(0)[0]==0){
                             bestMoves.add(moves);
                         }
                         else if (moves.get(0)[0] == bestMoveLength) {
-                            bestMoves.add(moves);
+                            ArrayList<int[]> move = new ArrayList<>();
+                            move.add(moves.get(0));
+                            move.add(moves.get(1));
+                            move.add(moves.get(2));
+                            bestMoves.add(move);
                         }
                     }
                 }
