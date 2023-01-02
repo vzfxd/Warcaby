@@ -44,21 +44,20 @@ public class SpanishBoardTest {
         //Metoda zwroci mozliwosci ruchu dla 4 pionkow przy rozstawieniu początkowym
         assertEquals(4,spanishBoard.checkBestMoves(Color.WHITE).size());
 
-        //przesuwanie pionka z (1,2) na (2,3) oraz z (0,5) na (1,4)
+        //przesuwanie pionka z (0,2) na (1,3) oraz z (3,5) na (2,4)
         ArrayList<int[]> moves = new ArrayList<>();
-        moves.add(new int[]{0,0});
         moves.add(new int[]{0,2});
         moves.add(new int[]{1,3});
         spanishBoard.move(moves);
 
         moves = new ArrayList<>();
-        moves.add(new int[]{0,0});
         moves.add(new int[]{3,5});
         moves.add(new int[]{2,4});
         spanishBoard.move(moves);
 
         //Metoda checkBestPawn powinna pokazac dostepne bicie
         ArrayList<int[]> possibleMove = spanishBoard.checkBestPawnMoves(new int[]{1,3});
+
         assertEquals(Arrays.toString(new int[]{1,1}), Arrays.toString(possibleMove.get(0)));
         assertEquals(Arrays.toString(new int[]{1,3}), Arrays.toString(possibleMove.get(1)));
         assertEquals(Arrays.toString(new int[]{3,5}), Arrays.toString(possibleMove.get(2)));
