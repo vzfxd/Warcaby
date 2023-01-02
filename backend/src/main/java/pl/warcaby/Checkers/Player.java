@@ -14,18 +14,22 @@ public class Player {
 
     WebSocket webSocket;
 
-    /**Konstuktor przyjmujący wyłącznie kolor gracza na potrzeby testów jednostkowych.*/
+    /**Konstuktor przyjmujący wyłącznie kolor gracza na potrzeby testów jednostkowych.
+     * @param color kolor gracza.*/
     public Player(Color color){
         this.color = color;
     }
-    /**Metoda zwracajaca kolor gracza. Getter.*/
+    /**Metoda zwracajaca kolor gracza. Getter.
+     * @return kolor gracza*/
     public Color getColor() {
         return color;
     }
-    /**Metoda ustawiajacą webSocket gracza. Setter.*/
+    /**Metoda ustawiajacą webSocket gracza. Setter.
+     * @param webSocket nowy websocket gracza.*/
     public void setWebSocket(WebSocket webSocket){
         this.webSocket = webSocket;
     }
-    /**Metoda zwracająca webSocket gracza. Getter.*/
+    /**Metoda zwracająca webSocket gracza. Getter.
+     * @return webSocket gracza.*/
     public WebSocket getWebSocket() { return this.webSocket;}
 }
