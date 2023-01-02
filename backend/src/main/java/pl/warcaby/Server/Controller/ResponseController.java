@@ -39,9 +39,6 @@ public class ResponseController{
         for(Player player: playerList){
             response.put("color",player.getColor());
             ArrayList<ArrayList<int[]>> possibleMoves = board.checkBestMoves(player.getColor());
-            for(ArrayList<int[]> pieceMove: possibleMoves){
-                pieceMove.remove(0);
-            }
             response.put("possibleMoves",possibleMoves);
             player.getWebSocket().send(response.toString());
         }
