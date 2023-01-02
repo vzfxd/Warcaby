@@ -1,6 +1,8 @@
 package pl.warcaby.Server.Controller;
 
 import pl.warcaby.Checkers.*;
+import pl.warcaby.Checkers.Variations.CanadianBoard;
+import pl.warcaby.Checkers.Variations.PolishBoard;
 import pl.warcaby.Checkers.Variations.SpanishBoard;
 import pl.warcaby.Server.Game;
 
@@ -30,6 +32,8 @@ public class GameController {
             game.addPlayer(player);
             switch(game.getBoardType()){
                 case SPANISH -> game.setBoard(new SpanishBoard(game.getPlayerList().get(0),game.getPlayerList().get(1)));
+                case POLISH -> game.setBoard(new PolishBoard(game.getPlayerList().get(0),game.getPlayerList().get(1)));
+                case CANADIAN -> game.setBoard(new CanadianBoard(game.getPlayerList().get(0),game.getPlayerList().get(1)));
             }
             return true;
         }
@@ -38,7 +42,7 @@ public class GameController {
 
     public Color getFirstField(int game_id){
         Game game = findGame(game_id);
-        if(game.getBoardType().equals(BoardType.SPANISH) || game.getBoardType().equals(BoardType.GERMAN)) return Color.WHITE; else return Color.BLACK;
+        if(game.getBoardType().equals(BoardType.SPANISH)) return Color.WHITE; else return Color.BLACK;
     }
 
     public Board getGameBoard(int game_id){

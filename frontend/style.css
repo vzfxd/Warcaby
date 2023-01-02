@@ -50,8 +50,8 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
 }
 
 .BLACK{
@@ -63,6 +63,6 @@ html, body {
 }
 
 .piece{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
 }
