@@ -1,9 +1,11 @@
 package pl.warcaby.Checkers.Variations;
 
+import lombok.NoArgsConstructor;
 import pl.warcaby.Checkers.*;
 
 import java.util.ArrayList;
 
+@NoArgsConstructor
 public class PolishBoard extends Board {
 
     public PolishBoard(Player whitePlayer, Player blackPlayer){
@@ -88,7 +90,7 @@ public class PolishBoard extends Board {
 
                 //ruch w lewo
 
-                if(x>0 && y<9 && this.fields[x-1][y+1].getPawnColor()==null){
+                if(x>0 && y<this.heigth-1 && this.fields[x-1][y+1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
                     move.add(new int[]{0, 0});
                     move.add(new int[]{x,y});
@@ -97,7 +99,7 @@ public class PolishBoard extends Board {
                 }
 
                 //ruch w prawo
-                if(x<7 && y<9 && this.fields[x+1][y+1].getPawnColor()==null){
+                if(x<this.width-1 && y<this.heigth-1 && this.fields[x+1][y+1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
                     move.add(new int[]{0, 0});
                     move.add(new int[]{x,y});
@@ -121,7 +123,7 @@ public class PolishBoard extends Board {
                 }
 
                 //ruch w prawo
-                if (x < 9 && y > 0 && this.fields[x + 1][y - 1].getPawnColor() == null) {
+                if (x < this.width-1 && y > 0 && this.fields[x + 1][y - 1].getPawnColor() == null) {
                     ArrayList<int[]> move = new ArrayList<>();
                     move.add(new int[]{0, 0});
                     move.add(new int[]{x, y});
@@ -133,7 +135,7 @@ public class PolishBoard extends Board {
             //bicie pionki zwykle
             //bicie w lewo gora
 
-            if(x>1 && y<8 && this.fields[x-1][y+1].getPawnColor()==enemyPawnColor && this.fields[x-2][y+2].getPawnColor()==null){
+            if(x>1 && y<this.heigth-2 && this.fields[x-1][y+1].getPawnColor()==enemyPawnColor && this.fields[x-2][y+2].getPawnColor()==null){
                 this.fields[x-2][y+2].setOccupied(this.fields[x][y].getOccupied());
                 ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{x-2,y+2});
                 int moreways = 0;
@@ -160,7 +162,7 @@ public class PolishBoard extends Board {
 
             //bicie w prawo gora
 
-            if(x<8 && y<8 && this.fields[x+1][y+1].getPawnColor()==enemyPawnColor && this.fields[x+2][y+2].getPawnColor()==null){
+            if(x<this.width-2 && y<this.heigth-2 && this.fields[x+1][y+1].getPawnColor()==enemyPawnColor && this.fields[x+2][y+2].getPawnColor()==null){
                 this.fields[x+2][y+2].setOccupied(this.fields[x][y].getOccupied());
                 ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{x+2,y+2});
                 int moreways = 0;
@@ -214,7 +216,7 @@ public class PolishBoard extends Board {
 
             //bicie w prawo dol
 
-            if(x<8 && y>1 && this.fields[x+1][y-1].getPawnColor()==enemyPawnColor && this.fields[x+2][y-2].getPawnColor()==null){
+            if(x<this.width-2 && y>1 && this.fields[x+1][y-1].getPawnColor()==enemyPawnColor && this.fields[x+2][y-2].getPawnColor()==null){
                 this.fields[x+2][y-2].setOccupied(this.fields[x][y].getOccupied());
                 ArrayList<ArrayList<int[]>> fullMove = getAllMoves(new int[]{x+2,y-2});
                 int moreways = 0;
@@ -248,7 +250,7 @@ public class PolishBoard extends Board {
             //szukanie bicia gora lewo
             int nx = x-1;
             int ny = y+1;
-            while(nx>0 && ny<9){
+            while(nx>0 && ny<this.heigth-1){
                 if(this.fields[nx][ny].getPawnColor()==pawnColor){break;}
                 if(this.fields[nx][ny].getPawnColor()==enemyPawnColor && this.fields[nx-1][ny+1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
@@ -285,7 +287,7 @@ public class PolishBoard extends Board {
                     allMoves.add(move);
                     nx--;
                     ny++;
-                    if(ny==9 || nx==0){
+                    if(ny==this.heigth-1 || nx==0){
                         if(this.fields[nx][ny].getPawnColor()==null){
                             move = addLastQueenMove(pawnLocation, nx ,ny);
                             allMoves.add(move);
@@ -348,7 +350,7 @@ public class PolishBoard extends Board {
 
             nx = x+1;
             ny = y+1;
-            while(nx<9 && ny<9){
+            while(nx<this.width-1 && ny<this.heigth-1){
                 if(this.fields[nx][ny].getPawnColor()==pawnColor){break;}
                 if(this.fields[nx][ny].getPawnColor()==enemyPawnColor && this.fields[nx+1][ny+1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
@@ -385,7 +387,7 @@ public class PolishBoard extends Board {
                     allMoves.add(move);
                     nx++;
                     ny++;
-                    if(ny==9 || nx==9){
+                    if(ny==this.heigth-1 || nx==this.width-1){
                         if(this.fields[nx][ny].getPawnColor()==null){
                             move = addLastQueenMove(pawnLocation, nx ,ny);
                             allMoves.add(move);
@@ -398,7 +400,7 @@ public class PolishBoard extends Board {
 
             nx = x+1;
             ny = y-1;
-            while(nx<9 && ny>0){
+            while(nx<this.width-1 && ny>0){
                 if(this.fields[nx][ny].getPawnColor()==pawnColor){break;}
                 if(this.fields[nx][ny].getPawnColor()==enemyPawnColor && this.fields[nx+1][ny-1].getPawnColor()==null){
                     ArrayList<int[]> move = new ArrayList<>();
@@ -435,7 +437,7 @@ public class PolishBoard extends Board {
                     allMoves.add(move);
                     nx++;
                     ny--;
-                    if(ny==0 || nx==9){
+                    if(ny==0 || nx==this.width-1){
                         if(this.fields[nx][ny].getPawnColor()==null){
                             move = addLastQueenMove(pawnLocation, nx ,ny);
                             allMoves.add(move);
@@ -457,7 +459,7 @@ public class PolishBoard extends Board {
         int y1 = steps.get(0)[1];
         int x2 = steps.get(1)[0];
         int y2 = steps.get(1)[1];
-        if(y2==7 || y2==0){
+        if(y2==this.heigth-1 || y2==0){
             this.fields[x2][y2].pawnTypeUpgrade();
         }
         if(x1<x2 && y1>y2){this.fields[x2-1][y2+1].setOccupied(null);}                 //zbicie/ruch od gornej lewej
