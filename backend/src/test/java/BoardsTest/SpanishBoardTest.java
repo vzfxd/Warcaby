@@ -63,4 +63,25 @@ public class SpanishBoardTest {
         assertEquals(Arrays.toString(new int[]{3,5}), Arrays.toString(possibleMove.get(2)));
         assertNotNull(spanishBoard.checkBestMoves(Color.WHITE));
     }
+
+    @Test
+    public void bestMovesForColor(){
+        ArrayList<int[]> moves = new ArrayList<>();
+        moves.add(new int[]{0,2});
+        moves.add(new int[]{1,3});
+        spanishBoard.move(moves);
+
+        moves = new ArrayList<>();
+        moves.add(new int[]{3,5});
+        moves.add(new int[]{2,4});
+        spanishBoard.move(moves);
+
+        ArrayList<ArrayList<int[]>> bestMoves = spanishBoard.checkBestMoves(Color.WHITE);
+        assertEquals(Arrays.toString(new int[]{1,1}), Arrays.toString(bestMoves.get(0).get(0)));
+        assertEquals(Arrays.toString(new int[]{1,3}), Arrays.toString(bestMoves.get(0).get(1)));
+        assertEquals(Arrays.toString(new int[]{3,5}), Arrays.toString(bestMoves.get(0).get(2)));
+
+
+    }
+
 }

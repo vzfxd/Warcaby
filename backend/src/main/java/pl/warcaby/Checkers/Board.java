@@ -1,5 +1,6 @@
 package pl.warcaby.Checkers;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**Abstrakcyjna klasa planszy na której toczy się rozgrywka gry w warcaby.*/
@@ -30,46 +31,24 @@ public abstract class Board {
     public ArrayList<ArrayList<int[]>> checkBestMoves(Color color){
         ArrayList<ArrayList<int[]>> bestMoves = new ArrayList<>();
         int bestMoveLength = 0;
+
         for(int y = 0; y<this.heigth;y++){
             for(int x = 0; x<this.width;x++){
                 if(fields[x][y].getPawnColor()==color){
                     ArrayList<int[]> moves = checkBestPawnMoves(new int[]{x, y});
-                    if(moves != null && moves.size() != 0) {
-                        if (moves.get(0)[0] > bestMoveLength) {
-                            bestMoves = new ArrayList<>();
-                            ArrayList<int[]> move = new ArrayList<>();
-                            move.add(moves.get(0));
-                            move.add(moves.get(1));
-                            move.add(moves.get(2));
-                            bestMoveLength = moves.get(0)[0];
-                            if(moves.get(0)[0]>1){
-                                for(int i=1;i<(moves.size()/bestMoveLength)-1;i++){
-                                    move.add(moves.get(2+(i*bestMoveLength)));
-                                }
-                            }
-                            else{
-                                for(int i=3;i<moves.size();i++){
-                                    move.add(moves.get(i));
-                                }
-                            }
-                            bestMoves.add(move);
-                        }else if(bestMoveLength == 0 && moves.get(0)[0]==0){
-                            bestMoves.add(moves);
-                        }
-                        else if (moves.get(0)[0] == bestMoveLength) {
-                            ArrayList<int[]> move = new ArrayList<>();
-                            move.add(moves.get(0));
-                            move.add(moves.get(1));
-                            move.add(moves.get(2));
-                            for(int i=3;i<moves.size();i++){
-                                move.add(moves.get(i));
-                            }
-                            bestMoves.add(move);
-                        }
+                    if(moves != null) {
+                        if(moves.get(0)[0]>bestMoveLength) bestMoveLength = moves.get(0)[0];
+                        bestMoves.add(moves);
                     }
                 }
             }
         }
+
+        for(Iterator<ArrayList<int[]>> it = bestMoves.iterator(); it.hasNext();){
+            ArrayList<int[]> move = it.next();
+            if(move.get(0)[0] != bestMoveLength) it.remove();
+        }
+
         return bestMoves;
     }
     /**Metoda zmieniajaca kolejke na drugiego gracza.*/
