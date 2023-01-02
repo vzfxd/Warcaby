@@ -5,9 +5,13 @@ import pl.warcaby.Checkers.*;
 
 import java.util.ArrayList;
 
+/**Polski wariant planszy do gry w warcaby.*/
 @NoArgsConstructor
 public class PolishBoard extends Board {
-
+    /**Konstruktor tworzący plansze 10x10 z pionkami na czarnych polach.
+     *
+     * @param whitePlayer gracz biały
+     * @param blackPlayer gracz czrny*/
     public PolishBoard(Player whitePlayer, Player blackPlayer){
         this.width = 10;
         this.heigth = 10;
@@ -21,6 +25,19 @@ public class PolishBoard extends Board {
         }
         this.turn = Color.WHITE;
     }
+    /**Metoda wybierająca najlepsze możliwe ruchy dla pionka na danej lokalizacji.
+     *
+     * @param pawnLocation lokalizacja pionka int[]{x, y}
+     * @return Lista zawierająca najlepsze ruchy dla pionka. Na początku listy ( List.get(0) )
+     * znajduje sie ilośc bitych pionków ( n ) podczas ruchu, następnie lokalizacje początkową ruchu ( List.get(1) ),
+     * pod kolejnymi indexami znajdują się lokalizacje na które kolejno przechodzi pionek podczas ruchu. Dla n>=1 bitych
+     * pionków jeden ruch znajduje się pod indexami od 2 do 2 + n-1 itd.
+     * Przykład:  2 ruchy z 2 bitymi pionkami
+     * List.get(0) = {2 , 2}
+     * List.get(1) = {x1, y1}
+     * od List.get(2) do List.get(3) - ruch nr 1
+     * od List.get(4) do List.get(5) - ruch nr 2
+     * */
     @Override
     public ArrayList<int[]> checkBestPawnMoves(int[] pawnLocation) {
         ArrayList<int[]> bestMoves =  new ArrayList<>();
@@ -56,7 +73,13 @@ public class PolishBoard extends Board {
         }
         else return null;
     }
-
+    /**Metoda tworzaca mozliwosc pojedynczego ruchu dla pionka królowej.
+     *
+     * @param pawnlocation lokalizacja początkowa pionka
+     * @param newx wspołrzędna x na która może zostac wykonany ruch
+     * @param newy wspołrzędna y na którą moze zostac wykonany ruch
+     * @return utworzony z podanych parametrow pojedynczy ruch.
+     * */
     private ArrayList<int[]> addLastQueenMove(int[] pawnlocation, int newx, int newy){
         ArrayList<int[]> move = new ArrayList<>();
         move.add(new int[]{0,0});
@@ -65,7 +88,11 @@ public class PolishBoard extends Board {
         return move;
     }
 
-
+    /**Metoda znajdująca rekurencyjnie wszystkie możliwe zestawy ruchów dla pionka na podanej lokalizacji.
+     *
+     * @param pawnLocation lokalizacja pionka na planszy int[]{x, y}
+     * @return Listy bedące możliwymi ruchami dla pionka. Na początku każdej listy znajduje sie ilośc bitych pionków
+     * podczas ruchu, następnie lokalizacja końcowa i wszystkie lokalizacje na które przechodzi pionek podczas ruchu.*/
     @Override
     protected ArrayList<ArrayList<int[]>> getAllMoves(int[] pawnLocation) {
         int x = pawnLocation[0];
@@ -449,7 +476,12 @@ public class PolishBoard extends Board {
         return allMoves;
     }
 
-
+    /**Metoda wykonujaca podane ruchy na planszy. Jezeli wystapilo bicie usuwa zbite pionki.
+     *
+     * @param steps Lista która zawiera informacje na temat ruchu w takiej formie:
+     * index0 - 'pozycja startowa' - (x,y),
+     * index1 - 'pozycja po wykonaniu ruchu' (x,y)
+     * */
     @Override
     public void move(ArrayList<int[]> steps) {
         Pawn pawn = this.fields[steps.get(0)[0]][steps.get(0)[1]].getOccupied();

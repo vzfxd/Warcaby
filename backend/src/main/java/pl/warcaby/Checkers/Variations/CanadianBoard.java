@@ -4,9 +4,12 @@ import pl.warcaby.Checkers.*;
 
 import java.util.ArrayList;
 
-
+/**Kanadyjski wariant gry w warcaby. Wariant ten różni się od polskiego jedynie rozmiarem planszy dlatego metody są
+ * dziedziczone od PolishBoard.*/
 public class CanadianBoard extends PolishBoard {
-
+    /**Kontruktor tworzący plansze 12x12 z pionkami na czarnych polach.
+     * @param whitePlayer gracz biały.
+     * @param blackPlayer gracz czarny.*/
     public CanadianBoard(Player whitePlayer, Player blackPlayer) {
         this.width = 12;
         this.heigth = 12;
