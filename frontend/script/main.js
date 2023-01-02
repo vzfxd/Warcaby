@@ -220,11 +220,9 @@ function pieceHandler(event){
     let [x,y] = getPieceLocation(selectedPiece);
     possibleForPiece = [];
     for(piece of possibleMoves){
-        if(piece[0][0]==x && piece[0][1]==y){
+        if(piece[1][0]==x && piece[1][1]==y){
             for(field of piece){
-                if(field[0]!=x && field[1]!=y){
-                    possibleForPiece.push(field);
-                }
+                possibleForPiece.push(field);
             }
         }
     }
@@ -232,8 +230,15 @@ function pieceHandler(event){
 }
 
 function highlightField(possibleForPiece){
-    for(field of possibleForPiece){
-        let fieldToHighlight = document.querySelector(".row-"+field[1]).children[field[0]];
+    let ilosc_bic = possibleForPiece[0][0];
+    let przeskok;
+    if(ilosc_bic == 0){
+        przeskok = 1;
+    }else{
+        przeskok = ilosc_bic[0];
+    }
+    for(i=2; i<possibleForPiece.length; i+=przeskok){
+        let fieldToHighlight = document.querySelector(".row-"+possibleForPiece[i][1]).children[possibleForPiece[i][0]];
         fieldToHighlight.style.boxSizing = "border-box";
         fieldToHighlight.style.border = "thick solid blue";
     }
