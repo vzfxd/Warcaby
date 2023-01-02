@@ -1,7 +1,7 @@
 package pl.warcaby.Checkers;
 
 public enum BoardType {
-    SPANISH("spanish"),GERMAN("german"),TURKISH("turkish");
+    SPANISH("spanish"),POLISH("polish"),CANADIAN("canadian");
 
     String type;
     BoardType(String type){

@@ -149,12 +149,13 @@ function changeColor(color){
 
 function createBoard(responseBoard, firstField){
     let i = 0
-    for(let y=7;y>=0;y--){
+    let size = responseBoard.length;
+    for(let y=size-1;y>=0;y--){
         row_div = document.createElement('div');
         row_div.classList.add('row-'+y,'row');
         board.appendChild(row_div);
-        if(y==7) firstField = changeColor(firstField);
-        for(let x=0;x<8;x++){
+        if(y==size-1) firstField = changeColor(firstField);
+        for(let x=0;x<size;x++){
             if(x!=0) firstField = changeColor(firstField);
             field = document.createElement('div');
             field.addEventListener("click",fieldHandler);

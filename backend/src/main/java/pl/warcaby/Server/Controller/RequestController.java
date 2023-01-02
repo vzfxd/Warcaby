@@ -21,8 +21,8 @@ public class RequestController {
         BoardType boardType;
         switch(type){
             case "spanish": boardType = BoardType.SPANISH; break;
-            case "german": boardType = BoardType.GERMAN; break;
-            case "turkish": boardType = BoardType.TURKISH; break;
+            case "polish": boardType = BoardType.POLISH; break;
+            case "canadian": boardType = BoardType.CANADIAN; break;
             default: boardType = null;
         }
         return boardType;
