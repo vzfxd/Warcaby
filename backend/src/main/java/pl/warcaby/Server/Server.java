@@ -14,10 +14,22 @@ import pl.warcaby.Server.Controller.ResponseController;
 import java.net.InetSocketAddress;
 import java.util.List;
 
+/**
+ * Klasa Serwera
+ */
 public class Server extends WebSocketServer {
 
+    /**
+     * Kontroler do zarządzania grami odbywającami sie na serwerze
+     */
     private static final GameController gameController = new GameController();
+    /**
+     * Kontroler do zarządzania requestami odbieranymi od klientów
+     */
     private static final RequestController requestController = new RequestController();
+    /**
+     * Kontroler do zarządzania odpowiedziami wysyłanymi do klientów w odpowiedzi na ich requesty
+     */
     private static final ResponseController responseController = new ResponseController();
 
     public Server(int port){
@@ -29,6 +41,11 @@ public class Server extends WebSocketServer {
     @Override
     public void onClose(WebSocket webSocket, int i, String s, boolean b) {}
 
+    /**
+     * Metoda wykonująca się podczas każdego otrzymania wiadomości od klienta
+     * @param webSocket webSocket klienta który wysyła request
+     * @param s request wysłany przez klienta
+     */
     @Override
     public void onMessage(WebSocket webSocket, String s) {
         String requestType = requestController.getRequestType(s);
