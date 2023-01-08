@@ -9,10 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Klasa reprezentująca gre
+ */
 public class Game {
+    /**
+     * Id gry
+     */
     private final int game_id;
+    /**
+     * Lista graczy
+     */
     private final List<Player> playerList;
+    /**
+     * Plansza
+     */
     private Board board;
+    /**
+     * Wariant planszy
+     */
     private final BoardType boardType;
 
     public Game(BoardType boardType){
@@ -34,6 +49,10 @@ public class Game {
         return game_id;
     }
 
+    /**
+     * Metoda dodająca gracza do gry
+     * @param player gracz, którego chcemy dodać
+     */
     public void addPlayer(Player player){
         playerList.add(player);
     }
