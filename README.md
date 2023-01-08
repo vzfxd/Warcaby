@@ -18,15 +18,18 @@ Grupowy projekt na technologie programowania. Aplikacja webowa umożliwiająca u
 # Zasady
 Ruchy wykonywane są naprzemiennie. Wygrywa gracz, który zbije wszystkie pionki przeciwnika lub zablokuje mu możliwośc ruchu. Pionek, który dojdzie na koniec planszy otrzymuje promocje i może poruszać się o dowolną liczbe pól do przodu oraz do tyłu.
 ###  Wariant hiszpański
+- plansza 8x8
 - obowiązek najlepszego bicia
 - bicie i ruch zwykłego pionka tylko do przodu
 - pionki ruszają się po skosie
 ###  Wariant polski
+- plansza 10x10
 - obowiązek najlepszego bicia
 - bicie zwykłego pionka możliwe do przodu oraz do tyłu
 - pionki ruszają się po skosie
 ###  Wariant kanadyjski
-- identycznie jak w polskim
+- plansza 12x12
+- reszta identycznie jak w polskim
 
 
 
