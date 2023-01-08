@@ -16,7 +16,6 @@ public class GameControllerTest {
         GameController gameController = new GameController();
         int game_id = gameController.createGame(new Player(Color.WHITE),BoardType.SPANISH);
         gameController.joinGame(new Player(Color.BLACK),game_id);
-        gameController.findGame(game_id).getBoardFields()[0][0].pawnTypeUpgrade();
         String[][] actualBoard = new String[][]{
                 {"*.*...#."},
                 {".*...#.#"},
