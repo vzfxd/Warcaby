@@ -1,20 +1,37 @@
 package pl.warcaby.Server.Controller;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import pl.warcaby.Checkers.BoardType;
 
+/**
+ * Klasa kontrolera, który obsługuje requesty wysyłane przez klienta
+ */
 public class RequestController {
+    /**
+     *
+     * @param request request wysłany przez klienta
+     * @return typ requestu (create/move/join)
+     */
     public String getRequestType(String request){
         JSONObject json = new JSONObject(request);
         return json.getString("type");
     }
 
+    /**
+     *
+     * @param request request wysłany przez klienta
+     * @return id gry
+     */
     public int getGameId(String request){
         JSONObject json = new JSONObject(request);
         return json.getInt("game_id");
     }
 
+    /**
+     *
+     * @param request request wysłany przez klienta
+     * @return wariant gry
+     */
     public BoardType getVariant(String request){
         JSONObject json = new JSONObject(request);
         String type = json.getString("variant");
@@ -28,6 +45,11 @@ public class RequestController {
         return boardType;
     }
 
+    /**
+     *
+     * @param request request wysłany przez klienta
+     * @return lokacja pionka, którym chce ruszyć klient
+     */
     public int[] getCurrentLocation(String request){
         JSONObject json = new JSONObject(request);
         int x = json.getInt("currentLocationX");
@@ -35,6 +57,11 @@ public class RequestController {
         return new int[]{x,y};
     }
 
+    /**
+     *
+     * @param request request wysłany przez klienta
+     * @return lokacja, na która klient chce ruszyć pionka
+     */
     public int[] getDesiredLocation(String request){
         JSONObject json = new JSONObject(request);
         int x = json.getInt("desiredLocationX");
