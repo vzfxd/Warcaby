@@ -1,3 +1,10 @@
+/**
+ * Klasy reprezentujące wysyłane requesty do servera.
+ * Wyróżnia się 3 klasy: Create,Join i Move request.
+ * Create request jest wysyłany gdy użytkownik chce stworzyć grę,
+ * Join request jest wysyłany gdy użytkownik chce dołączyć do gry,
+ * Move request jest wysyłany gdy użytkownik chce ruszyć pionkiem
+ */
 class CreateRequest{
     constructor(variant){
         this.type = requestType.CREATE;
@@ -81,10 +88,18 @@ let firstField;
 let turn;
 let result
 
+/**
+ * Ustanowienie połączenie z serwerem, poprzez podanie url.
+ * Dodaje handler gdy odbierana jest wiadomość od serwera.
+ */
 function establishConnection(url){
     socket = new WebSocket(url);
     socket.addEventListener("message", (event)=>{
         const response = JSON.parse(event.data)
+        /**
+         * Serwer wysłał odpowiedz - "game created".
+         * Zmienia się graficzny interfejs który pokazuje kod gry
+         */
         if(response['feedback']=='game created'){
             let game_id = response['game_id'];
             let code = document.querySelector('.code');
@@ -92,6 +107,10 @@ function establishConnection(url){
             menuContainer.style.display = "none";
             waitingContainer.style.display = "flex";
         }
+        /**
+         * Serwer wysłał odpowiedz - "game started".
+         * Zmienia się graficzny interfejs który pokazuje plansze
+         */
         if(response['feedback']=='game started'){
             turn = response['turn'];
             firstField = response['firstField'];
@@ -104,6 +123,10 @@ function establishConnection(url){
             menuContainer.style.display = "none";
             gameContainer.style.display = "flex";
         }
+        /**
+         * Serwer wysłał odpowiedz - "player moved".
+         * Aktualizuje się ustawienie pionków
+         */
         if(response['feedback']=='player moved'){
             possibleMoves = response['possibleMoves'];
             turn = response['turn'];
@@ -111,6 +134,10 @@ function establishConnection(url){
             board.innerHTML = '';
             createBoard(response['board'],firstField);
         }
+        /**
+         * Serwer wysłał odpowiedz - "game finished".
+         * Pojawia się komunikat o przegranej lub wygranej
+         */
         if(response['feedback']=='game finished'){
             console.log("finished");
             let winner = response['winner'];
@@ -124,6 +151,9 @@ function establishConnection(url){
     });
 }
 
+/**
+ * Handler przycisków do tworzenia gry i dołączania do gry
+ */
 function clickHandler(event){
     const src = event.srcElement;
     if(src.id=="join"){
@@ -147,6 +177,11 @@ function changeColor(color){
     }
 }
 
+/**
+ * 
+ * @param {*} responseBoard  plansza w formacie String[][], gdzie *=biały pionek, #=czarny pionek, .=puste pole
+ * @param {*} firstField kolor pierwszego pola na dole po lewej stronie
+ */
 function createBoard(responseBoard, firstField){
     let i = 0
     let size = responseBoard.length;
@@ -178,6 +213,11 @@ function createBoard(responseBoard, firstField){
     }
 }
 
+/**
+ * 
+ * @param {*} field pole dla którego chcemy poznać współrzędne
+ * @returns koordynaty x,y podanego pola
+ */
 function getFieldLocation(field){
     let x = field.classList[0].split('-')[1];
     let row = field.parentNode;
@@ -185,6 +225,11 @@ function getFieldLocation(field){
     return [x,y];
 }
 
+/**
+ * 
+ * @param {*} piece pionek dla którego chcemy poznać współrzędne
+ * @returns koordynaty x,y podanego pionka
+ */
 function getPieceLocation(piece){
     let col = piece.parentNode;
     let row = col.parentNode;
@@ -193,6 +238,10 @@ function getPieceLocation(piece){
     return [x,y];
 }
 
+/**
+ * Handler, który obsługuje klikniecia na pola
+ * @param {*} event 
+ */
 function fieldHandler(event){
     let field = event.srcElement;
     if(selectedPiece && field.classList[0].split('-')[0]=="col"){
@@ -215,6 +264,10 @@ function fieldHandler(event){
     }
 }
 
+/**
+ * Handler, który osbługuje kliknięcia na pionki
+ * @param {*} event 
+ */
 function pieceHandler(event){
     undoHighlight(possibleForPiece);
     selectedPiece = event.srcElement;
@@ -230,6 +283,10 @@ function pieceHandler(event){
     highlightField(possibleForPiece);
 }
 
+/**
+ * Podświetlanie pól, na które może ruszyć się pionek
+ * @param {*} possibleForPiece  pola na które może ruszyć się pionek
+ */
 function highlightField(possibleForPiece){
     let ilosc_bic = possibleForPiece[0][0];
     let przeskok;
@@ -245,6 +302,10 @@ function highlightField(possibleForPiece){
     }
 }
 
+/**
+ * Usunięcie podświetlenia pól, na które może ruszyć się pionek
+ * @param {*} possibleForPiece pola na które może ruszyć się pionek
+ */
 function undoHighlight(possibleForPiece){
     for(field of possibleForPiece){
         let fieldToHighlight = document.querySelector(".row-"+field[1]).children[field[0]];
