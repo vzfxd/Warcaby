@@ -104,9 +104,21 @@ public class GameController {
         for(Field[] row: fields){
             for(Field field: row){
                 if(field.getPawnColor() != null && field.getPawnColor().equals(Color.BLACK)){
-                    if(printedBoard[i][0] == null) printedBoard[i][0] = "#"; else printedBoard[i][0] += "#";
+                    if(field.getPawnType().equals(PawnType.NORMAL)){
+                        //zwykły czarny pionek
+                        if(printedBoard[i][0] == null) printedBoard[i][0] = "#"; else printedBoard[i][0] += "#";
+                    }else{
+                        //czarna królowa
+                        if(printedBoard[i][0] == null) printedBoard[i][0] = "@"; else printedBoard[i][0] += "@";
+                    }
                 } else if(field.getPawnColor() != null && field.getPawnColor().equals(Color.WHITE)){
-                    if(printedBoard[i][0] == null) printedBoard[i][0] = "*"; else printedBoard[i][0] += "*";
+                    if(field.getPawnType().equals(PawnType.NORMAL)){
+                        //zwykły biały pionek
+                        if(printedBoard[i][0] == null) printedBoard[i][0] = "*"; else printedBoard[i][0] += "*";
+                    }else{
+                        //biała królowa
+                        if(printedBoard[i][0] == null) printedBoard[i][0] = "&"; else printedBoard[i][0] += "&";
+                    }
                 }else{
                     if(printedBoard[i][0] == null) printedBoard[i][0] = "."; else printedBoard[i][0] += ".";
                 }

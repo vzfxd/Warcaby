@@ -122,6 +122,7 @@ function establishConnection(url){
             waitingContainer.style.display = "none";
             menuContainer.style.display = "none";
             gameContainer.style.display = "flex";
+            if(playerColor=="WHITE") document.body.style.backgroundColor = "DarkGoldenRod"; else document.body.style.backgroundColor = "DarkRed";
         }
         /**
          * Serwer wysłał odpowiedz - "player moved".
@@ -196,15 +197,25 @@ function createBoard(responseBoard, firstField){
             field.addEventListener("click",fieldHandler);
             field.classList.add('col-'+x,firstField);
             row_div.appendChild(field);
-            if(responseBoard[x][0][y] == "*" || responseBoard[x][0][y]=="#"){
+            if(responseBoard[x][0][y]!="."){
                 piece = document.createElement('div');
                 piece.classList.add("piece");
-                if(responseBoard[x][0][y]=="*"){
-                    piece.style.backgroundColor = "yellow";
-                    if(playerColor=="WHITE") piece.addEventListener("click",pieceHandler);
-                }else {
-                    piece.style.backgroundColor = "red";
-                    if(playerColor=="BLACK") piece.addEventListener("click",pieceHandler);
+                switch(responseBoard[x][0][y]){
+                    case '@':piece.style.backgroundColor = "red";
+                            piece.style.border = "thick solid blue";
+                            if(playerColor=="BLACK") piece.addEventListener("click",pieceHandler);
+                        break;
+                    case '#':piece.style.backgroundColor = "red";
+                            if(playerColor=="BLACK") piece.addEventListener("click",pieceHandler);
+                        break;
+                    case '&':piece.style.backgroundColor = "yellow";
+                            piece.style.border = "thick solid blue";
+                            if(playerColor=="WHITE") piece.addEventListener("click",pieceHandler);
+                        break;
+                    case '*':piece.style.backgroundColor = "yellow";
+                            if(playerColor=="WHITE") piece.addEventListener("click",pieceHandler);
+                        break;
+
                 }
                 piece.style.borderRadius = "25px";
                 field.appendChild(piece);
