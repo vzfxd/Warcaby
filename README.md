@@ -9,11 +9,13 @@ Grupowy projekt na technologie programowania. Aplikacja webowa umożliwiająca u
 # Uruchomienie
 - Skompliowanie i uruchomienie pliku Main.java ( backend/src/main/java/pl/warcaby/Main.java )
 - Skopiowanie scieżki do pliku index.html ( frontend/index.html ) np. "C:\Users\user1\Downloads\Warcaby\frontend\index.html" i następnie wklejenie adresu w przeglądarce.
+![](serwer.gif)
 
 # Dołączenie do gry
 - Należy otworzyć dwa okna ( gracz1 oraz gracz2 )
 - Gracz1 tworzy grę wybierając typ planszy i klikając "Create".
 - Gracz2 dołącza do gry wpisując kod wyświetlający się u Gracz1 i klika "Join".
+![](tworzenie_gry.gif)
 
 # Zasady
 Ruchy wykonywane są naprzemiennie. Wygrywa gracz, który zbije wszystkie pionki przeciwnika lub zablokuje mu możliwośc ruchu. Pionek, który dojdzie na koniec planszy otrzymuje promocje i może poruszać się o dowolną liczbe pól do przodu oraz do tyłu.
@@ -31,6 +33,7 @@ Ruchy wykonywane są naprzemiennie. Wygrywa gracz, który zbije wszystkie pionki
 - plansza 12x12
 - reszta identycznie jak w polskim
 
+![](gra.gif)
 
 
 # Dokumentacja
