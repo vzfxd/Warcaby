@@ -2,9 +2,9 @@
 Grupowy projekt na technologie programowania. Aplikacja webowa umożliwiająca użytkownikom grę w jeden z trzech wariantów gry w Warcaby ( hiszpański, polski, kanadyjski ).
 
 # Autorzy
-- https://github.com/sebawoz02
+- https://github.com/sebawoz02 Sebastian Woźniak
 
-- https://github.com/vzfxd
+- https://github.com/vzfxd Mateusz Nasewicz
 
 # Uruchomienie
 - Skompliowanie i uruchomienie pliku Main.java ( backend/src/main/java/pl/warcaby/Main.java )
