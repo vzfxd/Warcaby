@@ -41,4 +41,7 @@ Ruchy wykonywane są naprzemiennie. Wygrywa gracz, który zbije wszystkie pionki
 
 # Dokumentacja
 Javadoc https://github.com/vzfxd/Warcaby/blob/main/DOKUMENTACJA.zip
-Diagramy UML https://github.com/vzfxd/Warcaby/tree/main/DIAGRAMY
+![](https://github.com/vzfxd/Warcaby/blob/main/DIAGRAMY/diagram_klas.png)
+![](https://github.com/vzfxd/Warcaby/blob/main/readmeGIFS/create.png)
+![](https://github.com/vzfxd/Warcaby/blob/main/readmeGIFS/join.png)
+![](https://github.com/vzfxd/Warcaby/blob/main/readmeGIFS/move.png)
