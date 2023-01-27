@@ -1,0 +1,74 @@
+@options
+@packages
+@argfile
+-classpath
+'C:/Users/mario/.m2/repository/org/java-websocket/Java-WebSocket/1.5.3/Java-WebSocket-1.5.3.jar;C:/Users/mario/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar;C:/Users/mario/.m2/repository/org/json/json/20220924/json-20220924.jar;C:/Users/mario/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar;C:/Users/mario/.m2/repository/org/slf4j/slf4j-jdk14/1.7.25/slf4j-jdk14-1.7.25.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'14'
+-sourcepath
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/mario/IdeaProjects/Warcaby/backend/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'backend 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/14/docs/api' 'C:/Users/mario/IdeaProjects/Warcaby/backend/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'backend 1.0-SNAPSHOT API'
+pl.warcaby.Checkers
+pl.warcaby.Checkers.Variations
+pl.warcaby
+pl.warcaby.Server.Controller
+pl.warcaby.Server
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/Board.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/BoardType.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/Color.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/Field.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/Pawn.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/PawnType.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/Player.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/Variations/CanadianBoard.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/Variations/PolishBoard.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Checkers/Variations/SpanishBoard.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Main.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Server/Controller/GameController.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Server/Controller/RequestController.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Server/Controller/ResponseController.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Server/Game.java'
+'C:/Users/mario/IdeaProjects/Warcaby/backend/src/main/java/pl/warcaby/Server/Server.java'
+C:\Users\mario\.m2\repository\org\java-websocket\Java-WebSocket\1.5.3\Java-WebSocket-1.5.3.jar = 1670949116786
+C:\Users\mario\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar = 1650994253600
+C:\Users\mario\.m2\repository\org\json\json\20220924\json-20220924.jar = 1670949116883
+C:\Users\mario\.m2\repository\org\projectlombok\lombok\1.18.24\lombok-1.18.24.jar = 1665735594348
+C:\Users\mario\.m2\repository\org\slf4j\slf4j-jdk14\1.7.25\slf4j-jdk14-1.7.25.jar = 1671181523820
+C:\Users\mario\IdeaProjects\Warcaby\backend\src\main\java = 1671139409503
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\allclasses-index.html = 1673211591912
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\allpackages-index.html = 1673211591915
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\element-list = 1673211591737
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\help-doc.html = 1673211591947
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\index-all.html = 1673211591941
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\index.html = 1673211591896
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\javadoc.bat = 1673211428181
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\jquery-ui.overrides.css = 1673211591992
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\member-search-index.js = 1673211591922
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\module-search-index.js = 1673211591917
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\overview-summary.html = 1673211591944
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\overview-tree.html = 1673211591890
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\package-search-index.js = 1673211591918
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\script.js = 1673211591952
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\search.js = 1673211591957
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\stylesheet.css = 1673211591950
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\tag-search-index.js = 1673211591923
+C:\Users\mario\IdeaProjects\Warcaby\backend\target\site\apidocs\type-search-index.js = 1673211591920
