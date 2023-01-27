@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"pl.warcaby"},{"l":"pl.warcaby.Checkers"},{"l":"pl.warcaby.Checkers.Variations"},{"l":"pl.warcaby.Server"},{"l":"pl.warcaby.Server.Controller"}];updateSearchResults();
