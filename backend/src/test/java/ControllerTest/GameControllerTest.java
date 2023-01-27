@@ -46,9 +46,8 @@ public class GameControllerTest {
         board.getFields()[0][0].setOccupied(new Pawn(whitePlayer));
         board.getFields()[1][1].setOccupied(new Pawn(blackPlayer));
         Color color = gameController.victory(game_id);
-        System.out.println(color);
         gameController.move(game_id,new int[]{0,0},new int[]{2,2});
         color = gameController.victory(game_id);
-        System.out.println(color);
+        assertEquals(Color.WHITE,color);
     }
 }
