@@ -181,9 +181,13 @@ function clickHandler(event){
             const request = new JoinRequest(game_id);
             socket.send(request.toString());
         }
-    }else{
+    }else if(src.id="create"){
         const variant = document.querySelector('input[name="game-variant"]:checked').getAttribute('id');
         const request = new CreateRequest(variant);
+        socket.send(request.toString());
+    }else{
+        const variant = document.querySelector('input[name="game-variant"]:checked').getAttribute('id');
+        const request = new CreateBotRequest(variant);
         socket.send(request.toString());
     }
 }

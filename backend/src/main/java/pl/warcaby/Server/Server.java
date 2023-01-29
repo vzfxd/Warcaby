@@ -12,6 +12,7 @@ import pl.warcaby.Server.Controller.RequestController;
 import pl.warcaby.Server.Controller.ResponseController;
 
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,59 @@ public class Server extends WebSocketServer {
     @Override
     public void onClose(WebSocket webSocket, int i, String s, boolean b) {}
 
+    public void createRequestProcedure(WebSocket webSocket, String s){
+        Player player = new Player(Color.WHITE, webSocket);
+        int game_id = gameController.createGame(player, requestController.getVariant(s));
+        responseController.createResponse(webSocket, game_id);
+    }
+
+    public void joinRequestProcedure(WebSocket webSocket, String s){
+        int game_id = requestController.getGameId(s);
+        Boolean joined = gameController.joinGame(new Player(Color.BLACK,webSocket), game_id);
+        if(joined){
+            String[][] printedBoard = gameController.printBoard(game_id);
+            List<Player> playerList = gameController.findGame(game_id).getPlayerList();
+            Color firstField = gameController.getFirstField(game_id);
+            Board board = gameController.getGameBoard(game_id);
+            JSONObject response = responseController.joinResponse(printedBoard,firstField,game_id);
+            responseController.broadcast(playerList,response,board);
+        }
+    }
+
+    public void moveRequestProcedure(String s){
+        int[] currentLocation = requestController.getCurrentLocation(s);
+        int[] desiredLocation = requestController.getDesiredLocation(s);
+        int game_id = requestController.getGameId(s);
+        Game game = gameController.findGame(game_id);
+        Color turn = gameController.move(game_id,currentLocation,desiredLocation);
+        Color victory = gameController.victory(game_id);
+        if(victory == null){
+            String[][] printedBoard = gameController.printBoard(game_id);
+            JSONObject response = responseController.moveResponse(printedBoard,turn);
+            responseController.broadcast(game.getPlayerList(),response,game.getBoard());
+            if(gameController.checkBotExistence(game_id)){
+                while (turn.equals(Color.BLACK)){
+                    ArrayList<int[]> moves = gameController.getBotMoves(game.getBoard());
+
+                }
+            }
+        }else{
+            responseController.gameFinished(game.getPlayerList(),victory);
+        }
+    }
+
+    public void createBotRequestProcedure(WebSocket webSocket, String s){
+        Player player = new Player(Color.WHITE, webSocket);
+        int game_id = gameController.createBotGame(player, requestController.getVariant(s));
+        String[][] printedBoard = gameController.printBoard(game_id);
+        List<Player> playerList = gameController.findGame(game_id).getPlayerList();
+        Color firstField = gameController.getFirstField(game_id);
+        Board board = gameController.getGameBoard(game_id);
+        JSONObject response = responseController.joinResponse(printedBoard,firstField,game_id);
+        responseController.broadcast(playerList,response,board);
+
+    }
+
     /**
      * Metoda wykonująca się podczas każdego otrzymania wiadomości od klienta
      * @param webSocket webSocket klienta który wysyła request
@@ -49,35 +103,11 @@ public class Server extends WebSocketServer {
     @Override
     public void onMessage(WebSocket webSocket, String s) {
         String requestType = requestController.getRequestType(s);
-        if(requestType.equals("CREATE")) {
-            Player player = new Player(Color.WHITE, webSocket);
-            int game_id = gameController.createGame(player, requestController.getVariant(s));
-            responseController.createResponse(webSocket, game_id);
-        } else if (requestType.equals("JOIN")) {
-            int game_id = requestController.getGameId(s);
-            Boolean joined = gameController.joinGame(new Player(Color.BLACK,webSocket), game_id);
-            if(joined){
-                String[][] printedBoard = gameController.printBoard(game_id);
-                List<Player> playerList = gameController.findGame(game_id).getPlayerList();
-                Color firstField = gameController.getFirstField(game_id);
-                Board board = gameController.getGameBoard(game_id);
-                JSONObject response = responseController.joinResponse(printedBoard,firstField,game_id);
-                responseController.broadcast(playerList,response,board);
-            }
-        }else {
-            int[] currentLocation = requestController.getCurrentLocation(s);
-            int[] desiredLocation = requestController.getDesiredLocation(s);
-            int game_id = requestController.getGameId(s);
-            Game game = gameController.findGame(game_id);
-            Color turn = gameController.move(game_id,currentLocation,desiredLocation);
-            Color victory = gameController.victory(game_id);
-            if(victory == null){
-                String[][] printedBoard = gameController.printBoard(game_id);
-                JSONObject response = responseController.moveResponse(printedBoard,turn);
-                responseController.broadcast(game.getPlayerList(),response,game.getBoard());
-            }else{
-                responseController.gameFinished(game.getPlayerList(),victory);
-            }
+        switch (requestType) {
+            case "CREATE" -> createRequestProcedure(webSocket, s);
+            case "JOIN" -> joinRequestProcedure(webSocket, s);
+            case "MOVE" -> moveRequestProcedure(s);
+            case "CREATE_BOT" -> createBotRequestProcedure(webSocket,s);
         }
     }
 

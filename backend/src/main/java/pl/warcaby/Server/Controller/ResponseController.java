@@ -64,10 +64,12 @@ public class ResponseController{
      */
     public void broadcast(List<Player> playerList,JSONObject response,Board board){
         for(Player player: playerList){
-            response.put("color",player.getColor());
-            ArrayList<ArrayList<int[]>> possibleMoves = board.checkBestMoves(player.getColor());
-            response.put("possibleMoves",possibleMoves);
-            player.getWebSocket().send(response.toString());
+            if(player instanceof Player){
+                response.put("color",player.getColor());
+                ArrayList<ArrayList<int[]>> possibleMoves = board.checkBestMoves(player.getColor());
+                response.put("possibleMoves",possibleMoves);
+                player.getWebSocket().send(response.toString());
+            }
         }
     }
 
