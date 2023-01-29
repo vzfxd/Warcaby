@@ -3,6 +3,7 @@ package pl.warcaby.Server.Controller;
 import org.java_websocket.WebSocket;
 import org.json.JSONObject;
 import pl.warcaby.Checkers.Board;
+import pl.warcaby.Checkers.Bot;
 import pl.warcaby.Checkers.Color;
 import pl.warcaby.Checkers.Player;
 
@@ -64,7 +65,7 @@ public class ResponseController{
      */
     public void broadcast(List<Player> playerList,JSONObject response,Board board){
         for(Player player: playerList){
-            if(player instanceof Player){
+            if(!(player instanceof Bot)){
                 response.put("color",player.getColor());
                 ArrayList<ArrayList<int[]>> possibleMoves = board.checkBestMoves(player.getColor());
                 response.put("possibleMoves",possibleMoves);

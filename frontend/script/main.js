@@ -175,13 +175,14 @@ function establishConnection(url){
  */
 function clickHandler(event){
     const src = event.srcElement;
+    console.log(src);
     if(src.id=="join"){
         const game_id = document.querySelector('input[id="game-id"]').value;
         if(game_id!=""){
             const request = new JoinRequest(game_id);
             socket.send(request.toString());
         }
-    }else if(src.id="create"){
+    }else if(src.id=="create"){
         const variant = document.querySelector('input[name="game-variant"]:checked').getAttribute('id');
         const request = new CreateRequest(variant);
         socket.send(request.toString());
@@ -349,4 +350,5 @@ function undoHighlight(possibleForPiece){
 
 joinButton.addEventListener("click", clickHandler);
 createButton.addEventListener("click", clickHandler);
+botButton.addEventListener("click",clickHandler);
 establishConnection("ws://localhost:8080");

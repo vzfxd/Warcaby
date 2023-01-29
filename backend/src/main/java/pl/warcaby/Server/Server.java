@@ -46,6 +46,7 @@ public class Server extends WebSocketServer {
         Player player = new Player(Color.WHITE, webSocket);
         int game_id = gameController.createGame(player, requestController.getVariant(s));
         responseController.createResponse(webSocket, game_id);
+        System.out.println("CREATE");
     }
 
     public void joinRequestProcedure(WebSocket webSocket, String s){
@@ -61,6 +62,12 @@ public class Server extends WebSocketServer {
         }
     }
 
+    public void responseProcedure(int game_id,Game game,Color turn){
+        String[][] printedBoard = gameController.printBoard(game_id);
+        JSONObject response = responseController.moveResponse(printedBoard,turn);
+        responseController.broadcast(game.getPlayerList(),response,game.getBoard());
+    }
+
     public void moveRequestProcedure(String s){
         int[] currentLocation = requestController.getCurrentLocation(s);
         int[] desiredLocation = requestController.getDesiredLocation(s);
@@ -69,13 +76,12 @@ public class Server extends WebSocketServer {
         Color turn = gameController.move(game_id,currentLocation,desiredLocation);
         Color victory = gameController.victory(game_id);
         if(victory == null){
-            String[][] printedBoard = gameController.printBoard(game_id);
-            JSONObject response = responseController.moveResponse(printedBoard,turn);
-            responseController.broadcast(game.getPlayerList(),response,game.getBoard());
+            responseProcedure(game_id,game,turn);
             if(gameController.checkBotExistence(game_id)){
                 while (turn.equals(Color.BLACK)){
                     ArrayList<int[]> moves = gameController.getBotMoves(game.getBoard());
-
+                    turn = gameController.move(game_id,moves.get(0),moves.get(1));
+                    responseProcedure(game_id,game,turn);
                 }
             }
         }else{
@@ -92,7 +98,7 @@ public class Server extends WebSocketServer {
         Board board = gameController.getGameBoard(game_id);
         JSONObject response = responseController.joinResponse(printedBoard,firstField,game_id);
         responseController.broadcast(playerList,response,board);
-
+        System.out.println("BOT");
     }
 
     /**
