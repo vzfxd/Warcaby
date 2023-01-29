@@ -2,6 +2,7 @@ package pl.warcaby.Checkers.Variations;
 
 import lombok.NoArgsConstructor;
 import pl.warcaby.Checkers.*;
+import pl.warcaby.Checkers.BoardType;
 
 import java.util.ArrayList;
 

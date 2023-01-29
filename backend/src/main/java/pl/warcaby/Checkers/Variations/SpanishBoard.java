@@ -1,6 +1,8 @@
 package pl.warcaby.Checkers.Variations;
 
 import pl.warcaby.Checkers.*;
+import pl.warcaby.Checkers.BoardType;
+
 import java.util.ArrayList;
 
 /**Klasa planszy dla hiszpańskiej odmiany gry w warcaby.

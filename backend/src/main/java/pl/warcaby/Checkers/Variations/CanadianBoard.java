@@ -1,6 +1,7 @@
 package pl.warcaby.Checkers.Variations;
 
 import pl.warcaby.Checkers.*;
+import pl.warcaby.Checkers.BoardType;
 
 import java.util.ArrayList;
 
