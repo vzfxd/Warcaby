@@ -21,6 +21,22 @@ class CreateRequest{
     }
 }
 
+class CreateBotRequest{
+    constructor(variant){
+        this.type = requestType.CREATE_BOT;
+        this.variant = variant;
+    }
+
+    toString(){
+        let msg = {
+            type: this.type,
+            variant: this.variant
+        }
+
+        return JSON.stringify(msg);
+    }
+}
+
 class JoinRequest{
     constructor(game_id){
         this.type = requestType.JOIN;
@@ -60,7 +76,8 @@ class MoveRequest{
 const requestType = {
     CREATE : "CREATE",
     JOIN : "JOIN",
-    MOVE : "MOVE"
+    MOVE : "MOVE",
+    CREATE_BOT : "CREATE_BOT"
 }
 
 
@@ -73,6 +90,7 @@ const requestType = {
 
 const joinButton = document.getElementById("join");
 const createButton = document.getElementById("create");
+const botButton = document.getElementById("bot-play");
 const menuContainer = document.querySelector(".menu-container");
 const waitingContainer = document.querySelector(".waiting-container");
 const gameContainer = document.querySelector(".game-container");
