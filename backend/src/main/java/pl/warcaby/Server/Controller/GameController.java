@@ -17,6 +17,7 @@ public class GameController {
      * Lista gier
      */
     List<Game> gameList = new ArrayList<>();
+    Bot bot = new Bot(Color.BLACK);
 
     /**
      * Metoda tworząca gre
@@ -29,6 +30,17 @@ public class GameController {
         game.addPlayer(player);
         gameList.add(game);
         return game.getGame_id();
+    }
+
+    public int createBotGame(Player player, BoardType boardType){
+        int game_id = createGame(player,boardType);
+        joinGame(bot,game_id);
+        return game_id;
+    }
+
+    public boolean checkBotExistence(int game_id){
+        Game game = findGame(game_id);
+        if(game.getPlayerList().get(1) instanceof Bot) return true; else return false;
     }
 
     /**
@@ -160,5 +172,9 @@ public class GameController {
             if(turn.equals(Color.WHITE)) return Color.BLACK; else return Color.WHITE;
         }
         return null;
+    }
+
+    public ArrayList<int[]> getBotMoves(Board board) {
+        return bot.getBotMove(board);
     }
 }
