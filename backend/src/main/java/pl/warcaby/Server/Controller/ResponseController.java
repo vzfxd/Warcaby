@@ -84,7 +84,7 @@ public class ResponseController{
         json.put("feedback","game finished");
         json.put("winner",color);
         for(Player player: playerList){
-            player.getWebSocket().send(json.toString());
+            if(!(player instanceof Bot)) player.getWebSocket().send(json.toString());
         }
     }
 }
