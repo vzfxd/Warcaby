@@ -492,7 +492,7 @@ public class PolishBoard extends Board {
         int y1 = steps.get(0)[1];
         int x2 = steps.get(1)[0];
         int y2 = steps.get(1)[1];
-        if(y2==this.heigth-1 || y2==0){
+        if((y2==this.heigth-1 && pawn.getColor()==Color.WHITE) || (y2==0 && pawn.getColor()==Color.BLACK)){
             this.fields[x2][y2].pawnTypeUpgrade();
         }
         if(x1<x2 && y1>y2){this.fields[x2-1][y2+1].setOccupied(null);}                 //zbicie/ruch od gornej lewej
