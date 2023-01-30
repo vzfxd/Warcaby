@@ -81,7 +81,8 @@ public class Server extends WebSocketServer {
                 while (turn.equals(Color.BLACK)){
                     ArrayList<int[]> moves = gameController.getBotMoves(game.getBoard());
                     turn = gameController.move(game_id,moves.get(0),moves.get(1));
-                    responseProcedure(game_id,game,turn);
+                    victory = gameController.victory(game_id);
+                    if(victory == null) responseProcedure(game_id,game,turn); else responseController.gameFinished(game.getPlayerList(),victory);
                 }
             }
         }else{
